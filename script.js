@@ -246,7 +246,16 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("gourmet-section").style.display = "block";
         loadGourmetSlider();
     });
-
+    // 明示的にIDを使う（nth-childを廃止）
+    const gourmetCard = document.getElementById("open-gourmet");
+    // スマホでも100%反応するイベント
+    ["click", "touchstart"].forEach(ev => {
+        gourmetCard.addEventListener(ev, () => {
+            console.log("gourmet tapped!");
+            document.getElementById("gourmet-section").style.display = "block";
+            loadGourmetSlider();
+        });
+    });
     // 画像データ（店名 / メニュー / コメント）
     const gourmetData = [
         { img: "images/gourmet1.jpg", shop: "とんかつ檍", menu: "とんかつ定食", comment: "林SP🐷蒲田本店" },

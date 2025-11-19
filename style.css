@@ -91,6 +91,11 @@ body {
   align-items: center;
   text-align: center;
 }
+.card {
+  cursor: pointer;  /* ← 必須（スマホでも反応が安定する） */
+  touch-action: manipulation; /* ← タップ遅延を消す */
+  -webkit-tap-highlight-color: transparent; /* ← スマホで青枠防止 */
+}
 
 /* ===== ロゴ ===== */
 .logo-img { 
