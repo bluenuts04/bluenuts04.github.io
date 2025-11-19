@@ -515,3 +515,13 @@ css
     opacity: 1;
     transform: translateY(0);
 }
+
+
+1. 新しい履歴を作る（完全初期化）
+rm -r .git
+git init
+git add .
+git commit -m "clean history"
+git branch -M main
+git remote add origin https://github.com/bluenuts04/bluenuts04.github.io.git
+git push -f origin main
