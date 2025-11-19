@@ -238,4 +238,55 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("video-gallery").style.display = "block";
     document.getElementById("calendar-section").style.display = "none"; // 他を隠す
     });
+
+    // ---------------------------
+    // 美味い飯スライドショー
+    // ---------------------------
+    document.querySelector(".cards .card:nth-child(5)").addEventListener("click", () => {
+        document.getElementById("gourmet-section").style.display = "block";
+        loadGourmetSlider();
+    });
+
+    // 画像データ（店名 / メニュー / コメント）
+    const gourmetData = [
+        { img: "images/gourmet1.jpg", shop: "とんかつ檍", menu: "とんかつ定食", comment: "林SP🐷蒲田本店" },
+        { img: "images/gourmet2.jpg", shop: "ひも", menu: "ひもかわ冷", comment: "群馬名物ひもかわ" },
+        { img: "images/gourmet3.jpg", shop: "店名３", menu: "メニュー３", comment: "身体にいいラーメン" },
+        { img: "images/gourmet4.jpg", shop: "ラーメン潤", menu: "メニュー４", comment: "新潟背油岩ノリ" },
+        { img: "images/gourmet5.jpg", shop: "ラーメン飛粋", menu: "得ラーメン", comment: "上品な家系" },
+        { img: "images/gourmet6.jpg", shop: "店名６", menu: "メニュー６", comment: "コメント６" }
+    ];
+
+    let gourmetIndex = 0;
+
+    function loadGourmetSlider() {
+        const slider = document.getElementById("gourmetSlider");
+        slider.innerHTML = "";
+
+        gourmetData.forEach(item => {
+            slider.innerHTML += `
+                <div class="gourmet-item">
+                    <img src="${item.img}">
+                    <div class="gourmet-text">
+                        <p><b>${item.shop}</b></p>
+                        <p>${item.menu}</p>
+                        <p>${item.comment}</p>
+                    </div>
+                </div>
+            `;
+        });
+
+        startGourmetSlide();
+    }
+
+    function startGourmetSlide() {
+        const slider = document.getElementById("gourmetSlider");
+        const itemWidth = 340; // 画像＋間隔
+        setInterval(() => {
+            gourmetIndex++;
+            if (gourmetIndex >= gourmetData.length) gourmetIndex = 0;
+            slider.style.transform = `translateX(-${gourmetIndex * itemWidth}px)`;
+        }, 3000);
+    }
 });
+
