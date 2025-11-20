@@ -215,25 +215,27 @@ img {
     to {opacity:1;} 
 }
 
-/* ▼ 美味い飯スライダー用 */
+/* --- 美味い飯スライダー --- */
 .gourmet-slider-wrapper {
+    position: relative;
     width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
 }
 
 .gourmet-slider {
     display: flex;
-    transition: transform 0.7s ease;
+    transition: transform 0.4s ease;
 }
 
 .gourmet-item {
-    flex-shrink: 0;          /* ← スマホで画像が縮むのを防ぐ */
-    width: 320px;            /* 画像1枚分の幅（テキスト含む） */
-    margin-right: 20px;
-    text-align: center;
+    min-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
 }
 
 .gourmet-item img {
@@ -241,12 +243,36 @@ img {
     border-radius: 10px;
 }
 
-
 .gourmet-text {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #333;
+    text-align: center;
+    margin-top: 8px;
 }
+
+/* --- 左右矢印 --- */
+.gourmet-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 28px;
+    padding: 8px 12px;
+    background: rgba(0,0,0,0.3);
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    user-select: none;
+}
+
+#gourmetPrev { left: -5px; }
+#gourmetNext { right: -5px; }
+
+/* --- スマホ用調整 --- */
+@media (max-width: 480px) {
+    .gourmet-arrow {
+        font-size: 24px;
+        padding: 6px 10px;
+    }
+}
+
 
 /* ===== Contactフォーム ===== */
 #contact form { max-width: 400px; margin: 20px auto; }

@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // -------------------------
-    // 6. チーム名クリックメッセージ＋画像表示
+    // 6. チーム名クリックメッセージ＋画像表示（原文そのまま）
     // -------------------------
     const teamName = document.getElementById("team-name");
     if (teamName) {
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // -------------------------
-    // 7. チームコンセプト 等のクリックメッセージ
+    // 7. team-concept / member-atmosphere / main-activity / notes
     // -------------------------
     const setupClickableMessage = (id, messages, color="#006") => {
         const trigger = document.getElementById(id);
@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ]);
 
     // -----------------------------------
-    // カードごとに表示切替（カレンダー・動画）
+    // カード ごとの表示切替
     // -----------------------------------
     document.getElementById("open-calendar").addEventListener("click", function() {
         document.getElementById("calendar-section").style.display = "block";
@@ -224,18 +224,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("gourmet-section").style.display = "none";
     });
 
-    // ---------------------------
-    // 美味い飯スライドショー
-    // ---------------------------
-    document.getElementById("open-gourmet").addEventListener("click", () => {
-        document.getElementById("gourmet-section").style.display = "block";
-        loadGourmetSlider();
-
-        document.getElementById("video-gallery").style.display = "none";
-        document.getElementById("calendar-section").style.display = "none";
-    });
-
-    // データ
+    // ===================================
+    //  8. 美味い飯スライダー（無限ループ＋矢印＋スワイプ）
+    // ===================================
     const gourmetData = [
         { img: "images/gourmet1.jpg", shop: "とんかつ檍", menu: "特ロースかつ定食", comment: "林SP🐷蒲田本店" },
         { img: "images/gourmet2.jpg", shop: "花山うどん", menu: "ざる二味", comment: "群馬名物ひもかわ" },
@@ -245,56 +236,116 @@ document.addEventListener("DOMContentLoaded", () => {
         { img: "images/gourmet6.jpg", shop: "新橋ニューともちんラーメン", menu: "中華そば", comment: "懐かしい、やさしいお味" }
     ];
 
-    let gourmetIndex = 0;
+    let gourmetIndex = 1;
     let gourmetTimer = null;
 
-    function loadGourmetSlider() {
+    document.getElementById("open-gourmet").addEventListener("click", () => {
+        document.getElementById("gourmet-section").style.display = "block";
+        setupGourmetSlider();
+
+        document.getElementById("video-gallery").style.display = "none";
+        document.getElementById("calendar-section").style.display = "none";
+    });
+
+    function setupGourmetSlider() {
         const slider = document.getElementById("gourmetSlider");
         slider.innerHTML = "";
 
+        // 矢印
+        const leftArrow = document.createElement("div");
+        leftArrow.className = "gourmet-arrow left";
+        leftArrow.innerHTML = "&#10094;";
+        slider.parentElement.appendChild(leftArrow);
+
+        const rightArrow = document.createElement("div");
+        rightArrow.className = "gourmet-arrow right";
+        rightArrow.innerHTML = "&#10095;";
+        slider.parentElement.appendChild(rightArrow);
+
+        const lastClone = createItem(gourmetData[gourmetData.length - 1]);
+        slider.appendChild(lastClone);
+
         gourmetData.forEach(item => {
-            slider.innerHTML += `
-                <div class="gourmet-item">
-                    <img src="${item.img}">
-                    <div class="gourmet-text">
-                        <p><b>${item.shop}</b></p>
-                        <p>${item.menu}</p>
-                        <p>${item.comment}</p>
-                    </div>
-                </div>
-            `;
+            slider.appendChild(createItem(item));
         });
 
-        startGourmetSlide();
+        const firstClone = createItem(gourmetData[0]);
+        slider.appendChild(firstClone);
+
+        slider.style.transform = `translateX(-${getItemWidth()}px)`;
+
+        startGourmetInfiniteSlide();
+
+        // 矢印クリック
+        leftArrow.addEventListener("click", prevSlide);
+        rightArrow.addEventListener("click", nextSlide);
+
+        // タッチスワイプ
+        let startX = 0;
+        slider.addEventListener("touchstart", e => {
+            startX = e.touches[0].clientX;
+        });
+        slider.addEventListener("touchend", e => {
+            const diff = startX - e.changedTouches[0].clientX;
+            if (diff > 30) nextSlide();
+            if (diff < -30) prevSlide();
+        });
     }
 
-    // ★ 修正版：ズレない・スマホ対応・速度ゆっくり
-    function startGourmetSlide() {
-        const slider = document.getElementById("gourmetSlider");
-        const items = document.querySelectorAll(".gourmet-item");
+    function createItem(item) {
+        const div = document.createElement("div");
+        div.className = "gourmet-item";
+        div.innerHTML = `
+            <img src="${item.img}">
+            <div class="gourmet-text">
+                <p><b>${item.shop}</b></p>
+                <p>${item.menu}</p>
+                <p>${item.comment}</p>
+            </div>
+        `;
+        return div;
+    }
 
-        if (items.length === 0) return;
+    function getItemWidth() {
+        const item = document.querySelector(".gourmet-item");
+        return item.getBoundingClientRect().width + parseFloat(getComputedStyle(item).marginRight);
+    }
 
-        // アイテム幅を取得（画像サイズ＋margin）
-        function getItemWidth() {
-            return (
-                items[0].getBoundingClientRect().width +
-                parseFloat(getComputedStyle(items[0]).marginRight)
-            );
-        }
-
-        // すでに動いていたら一度止める
+    function startGourmetInfiniteSlide() {
         if (gourmetTimer) clearInterval(gourmetTimer);
-
-        gourmetTimer = setInterval(() => {
-            const itemWidth = getItemWidth();
-            gourmetIndex++;
-
-            if (gourmetIndex >= gourmetData.length) gourmetIndex = 0;
-
-            slider.style.transform = `translateX(-${gourmetIndex * itemWidth}px)`;
-        }, 3000); // ← 5秒でスライド
+        gourmetTimer = setInterval(nextSlide, 3000);
     }
+
+    function nextSlide() {
+        const slider = document.getElementById("gourmetSlider");
+        const width = getItemWidth();
+        gourmetIndex++;
+        slider.style.transition = "transform 0.8s ease";
+        slider.style.transform = `translateX(-${gourmetIndex * width}px)`;
+
+        setTimeout(() => {
+            if (gourmetIndex === gourmetData.length + 1) {
+                slider.style.transition = "none";
+                gourmetIndex = 1;
+                slider.style.transform = `translateX(-${width}px)`;
+            }
+        }, 820);
+    }
+
+    function prevSlide() {
+        const slider = document.getElementById("gourmetSlider");
+        const width = getItemWidth();
+        gourmetIndex--;
+        slider.style.transition = "transform 0.8s ease";
+        slider.style.transform = `translateX(-${gourmetIndex * width}px)`;
+
+        setTimeout(() => {
+            if (gourmetIndex === 0) {
+                slider.style.transition = "none";
+                gourmetIndex = gourmetData.length;
+                slider.style.transform = `translateX(-${gourmetData.length * width}px)`;
+            }
+        }, 820);
+    }
+
 });
-
-
