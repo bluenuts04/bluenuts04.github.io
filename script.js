@@ -237,12 +237,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // データ
     const gourmetData = [
-        { img: "images/gourmet1.jpg", shop: "とんかつ檍", menu: "とんかつ定食", comment: "林SP🐷蒲田本店" },
-        { img: "images/gourmet2.jpg", shop: "ひも", menu: "ひもかわ冷", comment: "群馬名物ひもかわ" },
-        { img: "images/gourmet3.jpg", shop: "店名３", menu: "メニュー３", comment: "身体にいいラーメン" },
-        { img: "images/gourmet4.jpg", shop: "ラーメン潤", menu: "メニュー４", comment: "新潟背油岩ノリ" },
-        { img: "images/gourmet5.jpg", shop: "ラーメン飛粋", menu: "得ラーメン", comment: "上品な家系" },
-        { img: "images/gourmet6.jpg", shop: "店名６", menu: "メニュー６", comment: "コメント６" }
+        { img: "images/gourmet1.jpg", shop: "とんかつ檍", menu: "特ロースかつ定食", comment: "林SP🐷蒲田本店" },
+        { img: "images/gourmet2.jpg", shop: "花山うどん", menu: "ざる二味", comment: "群馬名物ひもかわ" },
+        { img: "images/gourmet3.jpg", shop: "鶏ポタラーメンTHANK", menu: "ラーメンぽてりRich", comment: "鶏肉と野菜のポタージュの健康ラーメン" },
+        { img: "images/gourmet4.jpg", shop: "ラーメン潤", menu: "得ラーメン", comment: "新潟系背油いっぱい岩ノリ" },
+        { img: "images/gourmet5.jpg", shop: "ラーメン飛粋", menu: "特製ラーメン", comment: "上品な家系" },
+        { img: "images/gourmet6.jpg", shop: "新橋ニューともちんラーメン", menu: "中華そば", comment: "懐かしい、やさしいお味" }
     ];
 
     let gourmetIndex = 0;
