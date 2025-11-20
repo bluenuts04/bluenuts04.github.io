@@ -295,7 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
             gourmetIndex++;
             if (gourmetIndex >= gourmetData.length) gourmetIndex = 0;
             slider.style.transform = `translateX(-${gourmetIndex * itemWidth}px)`;
-        }, 3000);
+        }, 15000);
     }
 });
 
