@@ -214,6 +214,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const showSection = (id) => {
         const sections = ["calendar-section", "play-photo-section", "video-gallery", "gourmet-section", "activity-log-section"];
         sections.forEach(s => document.getElementById(s).style.display = s === id ? "block" : "none");
+        // 自動スクロール
+        const target = document.getElementById(id);
+        if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+        }
     };
 
     document.getElementById("open-video")?.addEventListener("click", () => showSection("video-gallery"));
@@ -221,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("open-play-photo")?.addEventListener("click", () => {
         showSection("play-photo-section");
         setupInfiniteSlider("photoSlider", [
-            { img:"images/play1.lpg" },
+            { img:"images/play1.jpg" },
             { img:"images/play2.jpg" },
             { img:"images/play3.jpg" },
             { img:"images/play4.jpg" }
