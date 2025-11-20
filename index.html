@@ -52,14 +52,13 @@ body {
 
 .section { padding: 60px 20px; text-align: center; }
 
-/* ★ JS無効化時でも必ず表示されるよう修正 */
 .section, .hero, .card, .my-photo {
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
 
 /* カード */
-.cards { display: flex; justify-content: center; gap: 20px; }
+.cards { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
 .card {
     width: 200px;
     height: 120px;
@@ -69,15 +68,60 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
-/* secretは完全無効化 */
+/* slider 共通 */
+.gourmet-slider-wrapper, .photo-slider-wrapper {
+    position: relative;
+    overflow: hidden;
+    max-width: 90%;
+    margin: 0 auto;
+}
+.gourmet-slider, .photo-slider {
+    display: flex;
+    transition: transform 0.8s ease;
+}
+.gourmet-item, .photo-item {
+    min-width: 200px;
+    margin-right: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.gourmet-item img, .photo-item img {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+}
+.gourmet-arrow, .photo-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 32px;
+    color: rgba(0,0,0,0.7);
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    padding: 8px 12px;
+    cursor: pointer;
+    user-select: none;
+}
+.gourmet-arrow#x, .photo-arrow#x { } /* placeholder */
+#gourmetPrev, #photoPrev { left: 0; }
+#gourmetNext, #photoNext { right: 0; }
+
 .popup,
 .result-wrap {
     display: none !important;
 }
 
 .link-like { cursor: default; color: inherit; text-decoration:none; }
+
+.activity-log {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.activity-log p { margin: 8px 0; }
 </style>
 </head>
 <body>
@@ -85,7 +129,6 @@ body {
 <header class="header">
     <h1 class="logo"><img src="images/logo.jpg" alt="Valdio ロゴ" class="logo-img"></h1>
     <nav class="nav">
-        
         <a href="#about">ABOUT</a>
         <a href="#services">SERVICES</a>
         <a href="#contact">CONTACT</a>
@@ -102,9 +145,11 @@ body {
         <p>東京都 大田区 蒲田を拠点としている<br>アマチュアのフットサル集団</p>
     </div>
 </section>
+
 <div class="notice-bar">
     <p>📢 お知らせ<br>次回大会は 12/27(土)ウルトラビギナー大会へ！<br>目指せ初勝利！</p>
 </div>
+
 <section id="about" class="section">
     <h2>ABOUT</h2>
     <p id="team-name" class="link-like">チーム名の由来</p>
@@ -118,9 +163,9 @@ body {
     <h2>SERVICES</h2>
     <div class="cards">
         <div class="card" id="open-calendar">スケジュール</div>
-        <div class="card">プレイ写真⚽</div>
+        <div class="card" id="open-play-photo">プレイ写真⚽</div>
         <div class="card" id="open-video">ショート動画📹</div>
-        <div class="card">活動実績</div>
+        <div class="card" id="open-activity-log">活動実績</div>
         <div class="card" id="open-gourmet">美味い飯</div>
         <a href="danger.html" class="card">不審者情報</a>
     </div>
@@ -131,7 +176,25 @@ body {
     <div id="calendar"></div>
 </section>
 
+<section id="play-photo-section" class="section" style="display:none;">
+    <h2>プレイ写真ギャラリー</h2>
+    <div class="photo-slider-wrapper">
+        <span class="photo-arrow" id="photoPrev">‹</span>
+        <span class="photo-arrow" id="photoNext">›</span>
+        <div class="photo-slider" id="photoSlider">
+            <!-- JS で画像追加 -->
+        </div>
+    </div>
+</section>
 
+<section id="activity-log-section" class="section" style="display:none;">
+    <h2>活動実績</h2>
+    <div class="activity-log" id="activityLog">
+        <p>2025.3.20　ヴァルディオ誕生</p>
+        <p>2025.3.20 ウルトラビギナー大会 4位</p>
+        <!-- JSで追加も可能 -->
+    </div>
+</section>
 
 <section id="video-gallery" class="section" style="display:none;">
   <h2>ショット動画ギャラリー</h2>
@@ -144,23 +207,22 @@ body {
     </video>
   </div>
 </section>
+
 <section id="gourmet-section" class="section" style="display:none;">
     <h2>美味い飯ギャラリー</h2>
-
     <div class="gourmet-slider-wrapper">
         <span class="gourmet-arrow" id="gourmetPrev">‹</span>
         <span class="gourmet-arrow" id="gourmetNext">›</span>
         <div class="gourmet-slider" id="gourmetSlider">
-            <!-- JS で画像をここに追加 -->
+            <!-- JS で画像追加 -->
         </div>
     </div>
 </section>
 
 <img src="images/photo1.jpg" alt="写真" class="my-photo">
+
 <section id="contact" class="section contact">
     <h2>CONTACT</h2>
-        <!-- CONTACT --> 
-         
     <p>Email: sample@example.com</p>
     <form id="contactForm">
         <label>名前<input type="text" name="name" required></label>
@@ -171,6 +233,7 @@ body {
     </form>
     <div class="result" id="result"></div>
 </section>
+
 <script src="script.js"></script>
 </body>
 </html>

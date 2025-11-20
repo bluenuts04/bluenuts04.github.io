@@ -47,8 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const calendarSection = document.getElementById("calendar-section");
     if (calendarBtn && calendarSection) {
         calendarBtn.addEventListener("click", () => {
-            calendarSection.style.display = "block";
-            calendarSection.scrollIntoView({ behavior: "smooth" });
+            showSection("calendar-section");
         });
     }
 
@@ -117,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // -------------------------
-    // 6. チーム名クリックメッセージ＋画像表示（原文そのまま）
+    // 6. チーム名クリックメッセージ＋画像表示
     // -------------------------
     const teamName = document.getElementById("team-name");
     if (teamName) {
@@ -212,140 +211,124 @@ document.addEventListener("DOMContentLoaded", () => {
     // -----------------------------------
     // カード ごとの表示切替
     // -----------------------------------
-    document.getElementById("open-calendar").addEventListener("click", function() {
-        document.getElementById("calendar-section").style.display = "block";
-        document.getElementById("video-gallery").style.display = "none";
-        document.getElementById("gourmet-section").style.display = "none";
-    });
+    const showSection = (id) => {
+        const sections = ["calendar-section", "play-photo-section", "video-gallery", "gourmet-section", "activity-log-section"];
+        sections.forEach(s => document.getElementById(s).style.display = s === id ? "block" : "none");
+    };
 
-    document.getElementById("open-video").addEventListener("click", function() {
-        document.getElementById("video-gallery").style.display = "block";
-        document.getElementById("calendar-section").style.display = "none";
-        document.getElementById("gourmet-section").style.display = "none";
+    document.getElementById("open-video")?.addEventListener("click", () => showSection("video-gallery"));
+    document.getElementById("open-activity-log")?.addEventListener("click", () => showSection("activity-log-section"));
+    document.getElementById("open-play-photo")?.addEventListener("click", () => {
+        showSection("play-photo-section");
+        setupInfiniteSlider("photoSlider", [
+            { img:"images/play1.lpg" },
+            { img:"images/play2.jpg" },
+            { img:"images/play3.jpg" },
+            { img:"images/play4.jpg" }
+        ], "photoPrev", "photoNext");
+    });
+    document.getElementById("open-gourmet")?.addEventListener("click", () => {
+        showSection("gourmet-section");
+        setupInfiniteSlider("gourmetSlider", [
+            { img:"images/gourmet1.jpg", shop:"とんかつ檍", menu:"特ロースかつ定食", comment:"林SP蒲田本店" },
+            { img:"images/gourmet2.jpg", shop:"花山うどん", menu:"ざる二味", comment:"群馬名物ひもかわ" },
+            { img:"images/gourmet3.jpg", shop:"鶏ポタラーメンTHANK", menu:"ラーメンぽてりRich", comment:"鶏肉と野菜のポタージュの健康ラーメン" },
+            { img:"images/gourmet4.jpg", shop:"ラーメン潤", menu:"得ラーメン", comment:"新潟系背油いっぱい岩ノリ" },
+            { img:"images/gourmet5.jpg", shop:"ラーメン飛粋", menu:"特製ラーメン", comment:"上品な家系" },
+            { img:"images/gourmet6.jpg", shop:"新橋ニューともちんラーメン", menu:"中華そば", comment:"懐かしい、やさしいお味" }
+        ], "gourmetPrev", "gourmetNext");
     });
 
     // ===================================
-    //  8. 美味い飯スライダー（無限ループ＋矢印＋スワイプ）
+    //  8. 無限ループスライダー共通関数
     // ===================================
-    const gourmetData = [
-        { img: "images/gourmet1.jpg", shop: "とんかつ檍", menu: "特ロースかつ定食", comment: "林SP🐷蒲田本店" },
-        { img: "images/gourmet2.jpg", shop: "花山うどん", menu: "ざる二味", comment: "群馬名物ひもかわ" },
-        { img: "images/gourmet3.jpg", shop: "鶏ポタラーメンTHANK", menu: "ラーメンぽてりRich", comment: "鶏肉と野菜のポタージュの健康ラーメン" },
-        { img: "images/gourmet4.jpg", shop: "ラーメン潤", menu: "得ラーメン", comment: "新潟系背油いっぱい岩ノリ" },
-        { img: "images/gourmet5.jpg", shop: "ラーメン飛粋", menu: "特製ラーメン", comment: "上品な家系" },
-        { img: "images/gourmet6.jpg", shop: "新橋ニューともちんラーメン", menu: "中華そば", comment: "懐かしい、やさしいお味" }
-    ];
+    function setupInfiniteSlider(sliderId, data, prevId, nextId) {
+        const slider = document.getElementById(sliderId);
+        const prev = document.getElementById(prevId);
+        const next = document.getElementById(nextId);
+        if (!slider || !data.length) return;
 
-    let gourmetIndex = 1;
-    let gourmetTimer = null;
-
-    document.getElementById("open-gourmet").addEventListener("click", () => {
-        document.getElementById("gourmet-section").style.display = "block";
-        setupGourmetSlider();
-
-        document.getElementById("video-gallery").style.display = "none";
-        document.getElementById("calendar-section").style.display = "none";
-    });
-
-    function setupGourmetSlider() {
-        const slider = document.getElementById("gourmetSlider");
         slider.innerHTML = "";
+        let index = 1;
+        let timer = null;
 
-        // 矢印
-        const leftArrow = document.createElement("div");
-        leftArrow.className = "gourmet-arrow left";
-        leftArrow.innerHTML = "&#10094;";
-        slider.parentElement.appendChild(leftArrow);
+        const createItem = (item) => {
+            const div = document.createElement("div");
+            div.className = sliderId.includes("gourmet") ? "gourmet-item" : "photo-item";
+            if (item.shop) { // グルメ
+                div.innerHTML = `
+                    <img src="${item.img}">
+                    <div class="gourmet-text">
+                        <p><b>${item.shop}</b></p>
+                        <p>${item.menu}</p>
+                        <p>${item.comment}</p>
+                    </div>
+                `;
+            } else { // プレイ写真
+                div.innerHTML = `<img src="${item.img}">`;
+            }
+            return div;
+        };
 
-        const rightArrow = document.createElement("div");
-        rightArrow.className = "gourmet-arrow right";
-        rightArrow.innerHTML = "&#10095;";
-        slider.parentElement.appendChild(rightArrow);
+        // クローン
+        slider.appendChild(createItem(data[data.length-1]));
+        data.forEach(d => slider.appendChild(createItem(d)));
+        slider.appendChild(createItem(data[0]));
 
-        const lastClone = createItem(gourmetData[gourmetData.length - 1]);
-        slider.appendChild(lastClone);
+        const getItemWidth = () => {
+            const item = slider.querySelector(sliderId.includes("gourmet") ? ".gourmet-item" : ".photo-item");
+            const style = getComputedStyle(item);
+            return item.getBoundingClientRect().width + parseFloat(style.marginRight);
+        };
 
-        gourmetData.forEach(item => {
-            slider.appendChild(createItem(item));
-        });
+        const moveToIndex = i => {
+            const width = getItemWidth();
+            slider.style.transition = "transform 0.8s ease";
+            slider.style.transform = `translateX(-${i * width}px)`;
+        };
 
-        const firstClone = createItem(gourmetData[0]);
-        slider.appendChild(firstClone);
+        const nextSlide = () => {
+            index++;
+            moveToIndex(index);
+            setTimeout(() => {
+                if (index === data.length + 1) {
+                    slider.style.transition = "none";
+                    index = 1;
+                    slider.offsetWidth; // 強制リフロー
+                    moveToIndex(index);
+                }
+            }, 820);
+        };
 
-        slider.style.transform = `translateX(-${getItemWidth()}px)`;
+        const prevSlide = () => {
+            index--;
+            moveToIndex(index);
+            setTimeout(() => {
+                if (index === 0) {
+                    slider.style.transition = "none";
+                    index = data.length;
+                    slider.offsetWidth;
+                    moveToIndex(index);
+                }
+            }, 820);
+        };
 
-        startGourmetInfiniteSlide();
+        prev?.addEventListener("click", prevSlide);
+        next?.addEventListener("click", nextSlide);
 
-        // 矢印クリック
-        leftArrow.addEventListener("click", prevSlide);
-        rightArrow.addEventListener("click", nextSlide);
-
-        // タッチスワイプ
+        // タッチ
         let startX = 0;
-        slider.addEventListener("touchstart", e => {
-            startX = e.touches[0].clientX;
-        });
+        slider.addEventListener("touchstart", e => startX = e.touches[0].clientX);
         slider.addEventListener("touchend", e => {
             const diff = startX - e.changedTouches[0].clientX;
             if (diff > 30) nextSlide();
             if (diff < -30) prevSlide();
         });
+
+        // 初期位置
+        slider.style.transform = `translateX(-${getItemWidth()}px)`;
+
+        // 自動再生
+        timer = setInterval(nextSlide, 3000);
     }
-
-    function createItem(item) {
-        const div = document.createElement("div");
-        div.className = "gourmet-item";
-        div.innerHTML = `
-            <img src="${item.img}">
-            <div class="gourmet-text">
-                <p><b>${item.shop}</b></p>
-                <p>${item.menu}</p>
-                <p>${item.comment}</p>
-            </div>
-        `;
-        return div;
-    }
-
-    function getItemWidth() {
-        const item = document.querySelector(".gourmet-item");
-        return item.getBoundingClientRect().width + parseFloat(getComputedStyle(item).marginRight);
-    }
-
-    function startGourmetInfiniteSlide() {
-        if (gourmetTimer) clearInterval(gourmetTimer);
-        gourmetTimer = setInterval(nextSlide, 3000);
-    }
-
-    function nextSlide() {
-        const slider = document.getElementById("gourmetSlider");
-        const width = getItemWidth();
-        gourmetIndex++;
-        slider.style.transition = "transform 0.8s ease";
-        slider.style.transform = `translateX(-${gourmetIndex * width}px)`;
-
-        setTimeout(() => {
-            if (gourmetIndex === gourmetData.length + 1) {
-                slider.style.transition = "none";
-                gourmetIndex = 1;
-                slider.style.transform = `translateX(-${width}px)`;
-            }
-        }, 820);
-    }
-
-    function prevSlide() {
-        const slider = document.getElementById("gourmetSlider");
-        const width = getItemWidth();
-        gourmetIndex--;
-        slider.style.transition = "transform 0.8s ease";
-        slider.style.transform = `translateX(-${gourmetIndex * width}px)`;
-
-        setTimeout(() => {
-            if (gourmetIndex === 0) {
-                slider.style.transition = "none";
-                gourmetIndex = gourmetData.length;
-                slider.style.transform = `translateX(-${gourmetData.length * width}px)`;
-            }
-        }, 820);
-    }
-
 });
