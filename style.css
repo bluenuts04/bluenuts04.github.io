@@ -215,32 +215,32 @@ img {
     to {opacity:1;} 
 }
 
-/* グルメスライダー */
+/* ▼ 美味い飯スライダー用 */
 .gourmet-slider-wrapper {
-    width: 90%;
-    margin: auto;
+    width: 100%;
     overflow: hidden;
-    border-radius: 12px;
-    border: 2px solid #ccc;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .gourmet-slider {
     display: flex;
-    gap: 40px;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.7s ease;
 }
 
 .gourmet-item {
-    min-width: 300px;
+    flex-shrink: 0;          /* ← スマホで画像が縮むのを防ぐ */
+    width: 320px;            /* 画像1枚分の幅（テキスト含む） */
+    margin-right: 20px;
     text-align: center;
 }
 
 .gourmet-item img {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 12px;
+    width: 100%;
+    border-radius: 10px;
 }
+
 
 .gourmet-text {
     margin-top: 10px;

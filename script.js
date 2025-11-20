@@ -164,34 +164,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // -------------------------
-    // 7. チームコンセプトクリックでメッセージ表示
+    // 7. チームコンセプト 等のクリックメッセージ
     // -------------------------
-    const conceptTrigger = document.getElementById("team-concept");
-    if (conceptTrigger) {
-        let step = 0;
-        const messages = [
-            "🌟 明るく！楽しく！仲間と共に成長するチーム 🌟",
-            "💡 協力して挑戦することを大切にしています",
-            "😊 みんなで支え合い、楽しむことがモットーです"
-        ];
-
-        const msgBox = document.createElement("p");
-        msgBox.style.marginTop = "10px";
-        msgBox.style.fontWeight = "bold";
-        msgBox.style.fontSize = "1.2em"; // 少し大きめ
-        msgBox.style.color = "#006";
-        conceptTrigger.insertAdjacentElement("afterend", msgBox);
-
-        conceptTrigger.style.cursor = "pointer";
-
-        conceptTrigger.addEventListener("click", () => {
-            msgBox.textContent = messages[step];
-            step = (step + 1) % messages.length;
-        });
-    }
-    // -------------------------
-    // 8. メンバーの雰囲気クリックでメッセージ表示
-     
     const setupClickableMessage = (id, messages, color="#006") => {
         const trigger = document.getElementById(id);
         if (!trigger) return;
@@ -211,7 +185,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    // 各項目のメッセージ配列
+    setupClickableMessage("team-concept", [
+        "🌟 明るく！楽しく！仲間と共に成長するチーム 🌟",
+        "💡 協力して挑戦することを大切にしています",
+        "😊 みんなで支え合い、楽しむことがモットーです"
+    ]);
+
     setupClickableMessage("member-atmosphere", [
         "😊 メンバーは明るく協力的です",
         "🤝 チームワークを大切にしています",
@@ -229,34 +208,34 @@ document.addEventListener("DOMContentLoaded", () => {
         "⏰ 遅刻や欠席の連絡は必ずお願いします",
         "📌 貴重品の管理は各自でお願いします"
     ]);
+
+    // -----------------------------------
+    // カードごとに表示切替（カレンダー・動画）
+    // -----------------------------------
     document.getElementById("open-calendar").addEventListener("click", function() {
-    document.getElementById("calendar-section").style.display = "block";
-    document.getElementById("video-gallery").style.display = "none"; // 他を隠す
+        document.getElementById("calendar-section").style.display = "block";
+        document.getElementById("video-gallery").style.display = "none";
+        document.getElementById("gourmet-section").style.display = "none";
     });
 
     document.getElementById("open-video").addEventListener("click", function() {
-    document.getElementById("video-gallery").style.display = "block";
-    document.getElementById("calendar-section").style.display = "none"; // 他を隠す
+        document.getElementById("video-gallery").style.display = "block";
+        document.getElementById("calendar-section").style.display = "none";
+        document.getElementById("gourmet-section").style.display = "none";
     });
 
     // ---------------------------
     // 美味い飯スライドショー
     // ---------------------------
-    document.querySelector(".cards .card:nth-child(5)").addEventListener("click", () => {
+    document.getElementById("open-gourmet").addEventListener("click", () => {
         document.getElementById("gourmet-section").style.display = "block";
         loadGourmetSlider();
+
+        document.getElementById("video-gallery").style.display = "none";
+        document.getElementById("calendar-section").style.display = "none";
     });
-    // 明示的にIDを使う（nth-childを廃止）
-    const gourmetCard = document.getElementById("open-gourmet");
-    // スマホでも100%反応するイベント
-    ["click", "touchstart"].forEach(ev => {
-        gourmetCard.addEventListener(ev, () => {
-            console.log("gourmet tapped!");
-            document.getElementById("gourmet-section").style.display = "block";
-            loadGourmetSlider();
-        });
-    });
-    // 画像データ（店名 / メニュー / コメント）
+
+    // データ
     const gourmetData = [
         { img: "images/gourmet1.jpg", shop: "とんかつ檍", menu: "とんかつ定食", comment: "林SP🐷蒲田本店" },
         { img: "images/gourmet2.jpg", shop: "ひも", menu: "ひもかわ冷", comment: "群馬名物ひもかわ" },
@@ -267,6 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     let gourmetIndex = 0;
+    let gourmetTimer = null;
 
     function loadGourmetSlider() {
         const slider = document.getElementById("gourmetSlider");
@@ -288,14 +268,33 @@ document.addEventListener("DOMContentLoaded", () => {
         startGourmetSlide();
     }
 
+    // ★ 修正版：ズレない・スマホ対応・速度ゆっくり
     function startGourmetSlide() {
         const slider = document.getElementById("gourmetSlider");
-        const itemWidth = 340; // 画像＋間隔
-        setInterval(() => {
+        const items = document.querySelectorAll(".gourmet-item");
+
+        if (items.length === 0) return;
+
+        // アイテム幅を取得（画像サイズ＋margin）
+        function getItemWidth() {
+            return (
+                items[0].getBoundingClientRect().width +
+                parseFloat(getComputedStyle(items[0]).marginRight)
+            );
+        }
+
+        // すでに動いていたら一度止める
+        if (gourmetTimer) clearInterval(gourmetTimer);
+
+        gourmetTimer = setInterval(() => {
+            const itemWidth = getItemWidth();
             gourmetIndex++;
+
             if (gourmetIndex >= gourmetData.length) gourmetIndex = 0;
+
             slider.style.transform = `translateX(-${gourmetIndex * itemWidth}px)`;
-        }, 15000);
+        }, 3000); // ← 5秒でスライド
     }
 });
+
 
