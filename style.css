@@ -1,105 +1,143 @@
 /* ===== 基本スタイル ===== */
 body {
-    margin: 0;
-    font-family: sans-serif;
-    color: #333;
+    margin: 0;                     /* 画面の余白をゼロにしてフル幅で表示 */
+    font-family: sans-serif;       /* 全体のフォントをサンセリフ体に統一 */
+    color: #333;                   /* 文字色を濃いグレーに設定（黒より少し柔らかい） */
 }
 
 /* ===== ヘッダー ===== */
 .header {
-    display: flex;
-    justify-content: space-between;
-    padding: 16px 32px;
-    background: #fffbfb;
-    transition: 0.3s ease;
-}
-.header.active {
-    padding: 5px 20px;
-    backdrop-filter: blur(6px);
-    background: rgba(255,255,255,0.6);
-}
-.nav a {
-    margin-left: 16px;
-    text-decoration: none;
-    color: #303;
+    display: flex;                 /* 横並びレイアウトにする（ロゴ＋ナビ） */
+    justify-content: space-between;/* 左右に要素を配置し広げる */
+    padding: 16px 32px;            /* 上下16px、左右32px の余白 */
+    background: #fffbfb;           /* ほぼ白の背景色 */
+    transition: 0.3s ease;         /* スクロール時の縮小アニメーションを滑らかにする */
 }
 
+/* スクロールしたときに付与されるクラス */
+.header.active {
+    padding: 5px 20px;             /* ヘッダーが縮んだときの余白 */
+    backdrop-filter: blur(6px);    /* 背景をぼかしてガラス風デザインにする */
+    background: rgba(255,255,255,0.6);  /* 半透明の白 */
+}
+
+/* ナビゲーションリンク */
+.nav a {
+    margin-left: 16px;             /* 各リンクの左側に余白を追加 */
+    text-decoration: none;         /* 下線を消す */
+    color: #303;                   /* 濃い紫っぽい色 */
+}
+
+/* ロゴ画像サイズ */
+.logo-img {
+    height:100px;                  /* 高さ100px に固定 */
+    width:auto;                    /* 画像比率を維持 */
+}
+
+/* ===== お知らせバー ===== */
 .notice-bar {
-    background: #ffed91;
-    text-align: center;
-    font-weight: bold;
-    padding: 10px;
-    position: relative;
-    z-index: 1000;
-    width: 100%;
+    background: #ffed91;           /* 明るい黄色で目立たせる */
+    text-align: center;            /* テキストを中央揃え */
+    font-weight: bold;             /* 文字を太く */
+    padding: 5px;                 /* 上下10px の余白 */
+    position: relative;            /* z-index を有効にするために必要 */
+    z-index: 1000;                 /* 動画や他の要素より上に表示 */
+    width: 100%;                   /* 横幅いっぱいに表示 */
 }
-/* ===== 背景動画 ===== */
+
+/* ▼ ヒーロー全体（動画を背景にする大きいヘッダー部分） ---------------------- */
 .hero {
-    position: relative;
-    width: 100%;
-    height: 60vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
+    position: relative;        /* 子要素（動画やオーバーレイ）を重ねるための基準にする */
+    width: 100%;               /* 横幅いっぱい */
+    height: 60vh;              /* 画面の高さの 60% を使用 */
+    overflow: hidden;          /* 動画が枠からはみ出しても隠す */
+    
+    display: flex;             /* 中央揃えのための flex レイアウト */
+    justify-content: center;   /* 横方向の中央揃え */
+    align-items: center;       /* 縦方向の中央揃え */
+    
+    color: white;              /* テキストは白色に */
+    text-align: center;        /* テキスト中央寄せ */
 }
+
+/* ▼ 背景動画 ------------------------------------------------------------ */
 .hero video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: translate(-50%, -50%);
-    z-index: -1;
+    position: absolute;        /* 枠の中で自由配置（重ねる用） */
+    top: 50%;                  /* ちょうど中央に位置 */
+    left: 50%;                 /* ちょうど中央に位置 */
+    width: 100%;               /* 横幅を全体に広げる */
+    height: 100%;              /* 高さも全体に広げる */
+    object-fit: cover;         /* 動画を縦横比崩さず枠いっぱいに表示 */
+    
+    transform: translate(-50%, -50%);  
+    /* ↑ top/left の 50% で中央に置いた後、
+       さらに動画自体の幅/高さの半分だけ戻して完璧な中央配置にする */
+    
+    z-index: -1;               /* テキストの後ろに下げる（背景扱い） */
 }
+
+/* ▼ 動画の上にかける暗めフィルター（黒の半透明） ---------------------- */
 .hero-overlay {
-    background: rgba(0,0,0,0.48);
-    position: absolute;
-    inset: 0;
+    background: rgba(0, 0, 0, 0.48); /* 動画を暗くして文字を読みやすくする */
+    position: absolute;              /* ヒーロー枠いっぱいに広げる */
+    inset: 0;                        /* top, right, bottom, left を 0 に（省略記法） */
 }
-.hero-text { 
-    position: relative; 
-    z-index: 10; 
+
+/* ▼ 中央のテキスト ----------------------------------------------------- */
+.hero-text {
+    position: relative;   /* スタック位置を明確に */
+    z-index: 10;          /* 動画とオーバーレイより前面に表示 */
 }
+
 
 /* ===== セクション ===== */
 .section { 
-    padding: 60px 20px; 
-    text-align: center; 
+    padding: 60px 20px;     /* 上下60px・左右20px の余白を確保 → 全体が見やすくなる */
+    text-align: center;     /* セクション内の文字を中央寄せにする */
 }
 
+/* 
+   本来はスクロール時のアニメーション用に
+   opacity や transform が操作されることがあるが、
+   今回は「常に表示された状態」に固定するための指定。
+*/
+.section, 
+.hero, 
+.card, 
+.my-photo {
+    opacity: 1 !important;             /* 透明度を常に100%にしてアニメーション無効化 */
+    transform: translateY(0) !important; /* Y方向の移動を常に0（元の位置）に固定 */
+}
 
-/* カード */
-.cards { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+/* ▼ カード共通デザイン -------------------------------------- */
 .card {
-    width: 140px;
-    height: 30px;
-    background: #cef3a5;
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    text-decoration: none;   /* 下線を消す */
-    color: inherit;          /* 親要素の文字色を継承 */
-    align-items: center;
-    cursor: pointer;
+    width: 135px;
+    height: 20px;
+    background: #a6f2a4;
+    font-weight: bold;             /* 文字を太く */
+    padding: 20px;                 /* カード内の余白を確保して見やすくする */
+    border-radius: 8px;            /* 角を丸くする（柔らかい印象） */
+    display: flex;                 /* 中央揃えのために flex を使う */
+    justify-content: center;       /* 水平方向の中央揃え */
+    align-items: center;           /* 垂直方向の中央揃え */
+    text-decoration: none;         /* リンクの下線を消す */
+    color: inherit;                /* 親要素の文字色を継承する */
+    cursor: pointer;               /* カーソルをポインタにしてクリック可能と示す */
+    
+    /* ▼ スマホでの操作性向上 -------------- */
+    touch-action: manipulation;    /* タップ時の 300ms 遅延（古いスマホ）を無効化 */
+    -webkit-tap-highlight-color: transparent; /* タップ時の青いハイライト（Android）を消す */
 }
+
+/* ▼ カード全体の配置 -------------------------------------- */
 .cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3列 */
-  gap: 20px;
-  justify-items: center;
-  margin: 0 auto;
-  max-width: 800px;
-}
-
-.card {
-  cursor: pointer;  /* ← 必須（スマホでも反応が安定する） */
-  touch-action: manipulation; /* ← タップ遅延を消す */
-  -webkit-tap-highlight-color: transparent; /* ← スマホで青枠防止 */
+    display: grid;                 /* グリッドレイアウトで整列 */
+    gap: 10px;                     /* カード同士の間隔を10px空ける */
+    flex-wrap: wrap;               /* 横に入りきらないカードを次の段へ折り返す */
+    grid-template-columns: repeat(3, 1fr); /* カードを3列に均等配置 */
+    justify-items: center;         /* 各カードを中央に寄せる */
+    margin: 0 auto;                /* 中央寄せ */
+    max-width: 800px;              /* 横幅の最大値（広がりすぎ防止） */
 }
 
 
@@ -126,31 +164,6 @@ img {
     opacity: 1; 
     transform: translateY(0); /* 元の位置に戻る */
 }
-
-/* ===== ポップアップ ===== */
-.popup {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.65);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-}
-.popup-content {
-    background: white;
-    padding: 24px;
-    border-radius: 12px;
-    text-align: center;
-    width: 280px;
-    animation: pop 0.25s ease;
-}
-.popup-content button { 
-    margin-top:12px; 
-    padding:8px 18px; 
-    cursor:pointer; 
-}
-.hidden { display:none; }
 
 /* コンセプトポップアップ */
 .concept-popup {
@@ -221,64 +234,63 @@ img {
     to {opacity:1;} 
 }
 
-/* --- 美味い飯スライダー --- */
-.gourmet-slider-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 360px;
-    margin: 0 auto;
-    overflow: hidden;
+/* ================================
+   slider 共通設定（グルメ/写真）
+================================ */
+/* ===== スライダーの外枠（グルメ・プレイ写真共通） ===== */
+.gourmet-slider-wrapper, .photo-slider-wrapper {
+    position: relative;   /* 矢印ボタン（← →）をこの枠の中で絶対配置するため */
+    overflow: hidden;     /* スライドが横に飛び出さないように隠す */
+    max-width: 90%;       /* 横幅を画面の90%以内に収める（スマホでも見やすい） */
+    margin: 0 auto;       /* 中央配置 */
 }
 
-.gourmet-slider {
-    display: flex;
-    transition: transform 0.4s ease;
+/* ===== スライド本体（横並びで動く部分） ===== */
+.gourmet-slider, .photo-slider {
+    display: flex;                 /* 画像を横一列に並べる */
+    transition: transform 0.8s ease;  /* スライド時のアニメーション（0.8秒で移動） */
 }
 
-.gourmet-item {
-    min-width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
+/* ===== 各スライドアイテム（一枚の画像枠） ===== */
+.gourmet-item, .photo-item {
+    min-width: 200px;    /* 画像の最低横幅 → スマホでもサイズが安定 */
+    margin-right: 16px;  /* スライド同士の間隔 */
+    border-radius: 8px;  /* 画像の角を丸くして見た目を良くする */
+    overflow: hidden;    /* はみ出た部分を隠す（角の丸みを活かすため） */
 }
 
-.gourmet-item img {
-    width: 100%;
-    border-radius: 10px;
+/* ===== 各スライド画像 ===== */
+.gourmet-item img, .photo-item img {
+    width: 100%;         /* 親枠に画像をピッタリ合わせる */
+    display: block;      /* 下に隙間ができないように block 化 */
+    border-radius: 8px;  /* 画像も角丸に合わせる */
 }
 
-.gourmet-text {
-    text-align: center;
-    margin-top: 8px;
+/* ===== スライダーの矢印（← →） ===== */
+.gourmet-arrow, .photo-arrow {
+    position: absolute;                  /* スライダー枠の中に重ねて配置 */
+    top: 50%;                            /* 縦中央へ配置 */
+    transform: translateY(-50%);         /* 完全な中央に補正 */
+    font-size: 32px;                     /* 矢印を大きく見やすく */
+    color: rgba(0,0,0,0.7);              /* 矢印の色（半透明の黒） */
+    background: rgba(255,255,255,0.5);   /* 背景を白半透明にして可視性UP */
+    border-radius: 50%;                  /* ボタンを丸くする */
+    padding: 8px 12px;                   /* クリック範囲を広げる */
+    cursor: pointer;                     /* カーソルをポインタに */
+    user-select: none;                   /* クリック時に文字選択が起きないように */
 }
 
-/* --- 左右矢印 --- */
-.gourmet-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 28px;
-    padding: 8px 12px;
-    background: rgba(0,0,0,0.3);
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-    user-select: none;
+/* 空の placeholder（将来の拡張用／削除してOK） */
+.gourmet-arrow#x, .photo-arrow#x { }
+
+/* ===== 左矢印（共通指定） ===== */
+#gourmetPrev, #photoPrev {
+    left: 0;          /* 左端に配置 */
 }
-
-#gourmetPrev { left: -5px; }
-#gourmetNext { right: -5px; }
-
-/* --- スマホ用調整 --- */
-@media (max-width: 480px) {
-    .gourmet-arrow {
-        font-size: 24px;
-        padding: 6px 10px;
-    }
+/* ===== 右矢印（共通指定） ===== */
+#gourmetNext, #photoNext {
+    right: 0;         /* 右端に配置 */
 }
-
 
 /* ===== Contactフォーム ===== */
 #contact form { max-width: 400px; margin: 20px auto; }
@@ -287,13 +299,26 @@ img {
 #contact button { margin-top:10px; padding:10px; cursor:pointer; }
 #contact .result { margin-top:10px; font-weight:bold; color:green; }
 
-/* ===== スマホ対応 ===== */
-@media (max-width: 600px) {
-  .container { padding: 10px; }
-  h1 { font-size: 1.5rem; }
-  .two-column { flex-direction: column; }
+/* ================================
+   スマホ向け調整（画面幅480px以下）
+================================ */
+@media (max-width: 480px) {
+    .gourmet-arrow {
+        font-size: 24px;     /* 矢印を少し小さく */
+        padding: 6px 10px;   /* ボタンサイズを縮小 */
+    }
 }
+/* ===== スマホ対応 ===== */
+@media (max-width: 600px) { /* コンテナの左右余白を狭くしてスマホ画面に収める */
+  .container {
+    padding: 10px;
+  }
+  h1 { 
+    font-size: 1.5rem;
+  }   /* h1見出しのフォントサイズを小さくして画面に収める */
+} 
 @media screen and (max-width: 600px) {
   .cards {
     grid-template-columns: repeat(3, 1fr); /* スマホでも3列 */
+  }
 } 

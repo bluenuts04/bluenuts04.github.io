@@ -5,123 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valdio - FutSal Team</title>
 <link rel="stylesheet" href="style.css">
-
 <style>
-body {
-    margin: 0;
-    font-family: sans-serif;
-    color: #333;
-}
-.header {
-    display: flex;
-    justify-content: space-between;
-    padding: 16px 32px;
-    background: #e8e8ea;
-    transition: 0.3s ease;
-}
-.nav a { margin-left: 16px; text-decoration: none; color: #303; }
-.logo-img { height:100px; width:auto; }
-
-.hero {
-    position: relative;
-    width: 100%;
-    height: 60vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgb(125, 127, 115);
-    text-align: center;
-}
-.hero video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-}
-.hero-overlay {
-    background: rgba(0,0,0,0.48);
-    position: absolute;
-    inset: 0;
-}
-.hero-text { position: relative; z-index: 10; }
-
-.section { padding: 60px 20px; text-align: center; }
-
-.section, .hero, .card, .my-photo {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-/* カード */
-.cards { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-.card {
-    width: 140px;
-    height: 30px;
-    background: #cef3a5;
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-/* slider 共通 */
-.gourmet-slider-wrapper, .photo-slider-wrapper {
-    position: relative;
-    overflow: hidden;
-    max-width: 90%;
-    margin: 0 auto;
-}
-.gourmet-slider, .photo-slider {
-    display: flex;
-    transition: transform 0.8s ease;
-}
-.gourmet-item, .photo-item {
-    min-width: 200px;
-    margin-right: 16px;
-    border-radius: 8px;
-    overflow: hidden;
-}
-.gourmet-item img, .photo-item img {
-    width: 100%;
-    display: block;
-    border-radius: 8px;
-}
-.gourmet-arrow, .photo-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 32px;
-    color: rgba(0,0,0,0.7);
-    background: rgba(255,255,255,0.5);
-    border-radius: 50%;
-    padding: 8px 12px;
-    cursor: pointer;
-    user-select: none;
-}
-.gourmet-arrow#x, .photo-arrow#x { } /* placeholder */
-#gourmetPrev, #photoPrev { left: 0; }
-#gourmetNext, #photoNext { right: 0; }
-
-.popup,
-.result-wrap {
-    display: none !important;
-}
-
-.link-like { cursor: default; color: inherit; text-decoration:none; }
-
-.activity-log {
-    text-align: left;
-    max-width: 600px;
-    margin: 0 auto;
-}
-.activity-log p { margin: 8px 0; }
 </style>
 </head>
 <body>
@@ -177,7 +61,7 @@ body {
 </section>
 
 <section id="play-photo-section" class="section" style="display:none;">
-    <h2>プレイ写真ギャラリー</h2>
+    <h2>写真ギャラリー</h2>
     <div class="photo-slider-wrapper">
         <span class="photo-arrow" id="photoPrev">‹</span>
         <span class="photo-arrow" id="photoNext">›</span>
@@ -209,7 +93,7 @@ body {
 </section>
 
 <section id="gourmet-section" class="section" style="display:none;">
-    <h2>美味い飯ギャラリー</h2>
+    <h2>大田区の美味い飯</h2>
     <div class="gourmet-slider-wrapper">
         <span class="gourmet-arrow" id="gourmetPrev">‹</span>
         <span class="gourmet-arrow" id="gourmetNext">›</span>
