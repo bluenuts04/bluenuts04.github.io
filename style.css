@@ -293,6 +293,93 @@ img {
 #contact button { margin-top:10px; padding:10px; cursor:pointer; }
 #contact .result { margin-top:10px; font-weight:bold; color:green; }
 
+/* ============================
+   FOOTER
+============================ */
+.footer {
+    background: #111;
+    color: #eee;
+    padding: 40px 20px 20px;
+    margin-top: 50px;
+    font-family: "Arial", sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.footer-logo-area {
+    max-width: 250px;
+}
+
+.footer-logo {
+    width: 80px;
+    border-radius: 10px;
+}
+
+.footer-text {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.footer-links,
+.footer-social {
+    min-width: 150px;
+}
+
+.footer-links h4,
+.footer-social h4 {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+}
+
+.footer-links a,
+.footer-social a {
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    margin: 6px 0;
+    transition: 0.3s;
+}
+
+.footer-links a:hover,
+.footer-social a:hover {
+    color: #fff;
+    padding-left: 5px;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.8rem;
+    color: #888;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+}
+
+/* --- SP対応 --- */
+@media (max-width: 600px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .footer-links,
+    .footer-social {
+        text-align: center;
+    }
+}
+
+
 /* ================================
    スマホ向け調整（画面幅480px以下）
 ================================ */
