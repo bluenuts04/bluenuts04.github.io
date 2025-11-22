@@ -9,7 +9,7 @@ body {
 .header {
     display: flex;                 /* 横並びレイアウトにする（ロゴ＋ナビ） */
     justify-content: space-between;/* 左右に要素を配置し広げる */
-    padding: 16px 32px;            /* 上下16px、左右32px の余白 */
+    padding: 0px 32px;            /* 上下16px、左右32px の余白 */
     background: #fffbfb;           /* ほぼ白の背景色 */
     transition: 0.3s ease;         /* スクロール時の縮小アニメーションを滑らかにする */
 }
@@ -140,17 +140,11 @@ body {
     max-width: 800px;              /* 横幅の最大値（広がりすぎ防止） */
 }
 
-
-/* ===== ロゴ ===== */
-.logo-img { 
-    height: 100px; 
-    width: auto; 
-}
-
 /* ===== 画像 ===== */
 img { 
     max-width: 100%; 
     height: auto; 
+    margin: 0 auto;                /* 中央寄せ */
 }
 
 /* ===== スクロールふわっと ===== */
@@ -207,7 +201,7 @@ img {
     line-height: 1.5;
 }
 
-/* ===== 秘密画像 ===== */
+/* ===== 秘密画像 ===== *secret.html/
 .result-wrap {
     position: fixed;
     inset: 0;
@@ -322,3 +316,15 @@ img {
     grid-template-columns: repeat(3, 1fr); /* スマホでも3列 */
   }
 } 
+@media (max-width: 600px) {
+    .cards {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 12px;
+        padding: 8px;
+    }
+
+    .card {
+        padding: 16px;
+        font-size: 16px;
+    }
+}

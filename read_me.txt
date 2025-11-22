@@ -7,12 +7,15 @@ script.js
 images（フォルダ）
 の4点セット。
 
-コードはあなたがコピペして、そのまま GitHub Pages に置けば公開できる。
-yourname.github.io/
-├── index.html
-├── styles.css
-└── images/
-これからやることをザックリ言うと：
+HP_勉強 
+├ images 
+│ └ （画像ファイル）
+├ movies 
+│ └ （動画ファイル） 
+├ danger.html 
+├ index.html 
+├ style.css 
+└ script.js
 
 VSCodeでプロジェクトを開く
 

@@ -6,21 +6,28 @@
     <title>大田区 不審者情報</title>
 
     <style>
+        /* ------------------------------
+           ページ全体の基本デザイン
+        ------------------------------ */
         body {
             font-family: sans-serif;
             padding: 20px;
-            background-color: #f8f8f8;
+            background-color: #f0f4ef;
         }
-
+        /* ------------------------------
+           中央の白いカード部分
+        ------------------------------ */
         .section {
-            background-color: #fff;
+            background-color: #9ef6ad;
             padding: 20px;
             border-radius: 10px;
             max-width: 800px;
             margin: 0 auto;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(184, 11, 11, 0.1);
         }
-
+        /* ------------------------------
+           不審者画像（クリックで拡大）
+        ------------------------------ */
         img {
             max-width: 90%;
             border-radius: 10px;
@@ -28,8 +35,9 @@
             margin: 20px auto;
             cursor: pointer;
         }
-
-        /* 戻るボタン */
+        /* ------------------------------
+           戻るボタン
+        ------------------------------ */
         .back-btn {
             display: inline-block;
             padding: 10px 18px;
@@ -44,23 +52,25 @@
             background-color: #2980b9;
         }
 
-        /* モーダル背景 */
+        /* ------------------------------
+           モーダル（拡大画像の背景）
+        ------------------------------ */
         #modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
+            display: none;  /* 初期は非表示 */
+            position: fixed; /* 画面固定 */
+            z-index: 1000;  /* 最前面に表示 */
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(0,0,0,0.8);/* 半透明の黒背景 */
 
-            display: flex;               /* ★ 重要：中央に配置するために必要 */
-            justify-content: center;
+            justify-content: center;/* ★ 重要：中央に配置するために必要 */
             align-items: center;
         }
-
-        /* 拡大画像 */
+        /* ------------------------------
+           モーダル内の拡大画像
+        ------------------------------ */
         #modalImg {
             max-width: 90%;
             max-height: 80%;
@@ -68,7 +78,9 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
 
-        /* × ボタン */
+        /* ------------------------------
+           ×（閉じるボタン）
+        ------------------------------ */
         .close {
             position: absolute;
             top: 20px;
@@ -82,41 +94,56 @@
 
 <body>
 
-    <!-- 戻るボタン -->
+    <!-- ==========================
+         戻るボタン
+    =========================== -->
     <a href="index.html" class="back-btn">← 戻る</a>
-
+    <!-- ==========================
+         メイン内容
+    =========================== -->
     <section class="section">
         <h2>大田区 不審者情報</h2>
         <p>最新の注意情報はこちらをご確認ください。</p>
 
-        <!-- 画像 -->
+        <!-- ▼ クリックすると拡大される画像 -->
         <img id="dangerImg" src="images/danger.jpg" alt="不審者情報">
     </section>
 
-    <!-- モーダル -->
+    <!-- ==========================
+         モーダル（画像拡大表示）
+    =========================== -->
     <div id="modal">
         <span class="close">&times;</span>
         <img id="modalImg">
     </div>
 
     <script>
+    /* ------------------------------
+           必要な要素の取得
+    ------------------------------ */
         const img = document.getElementById('dangerImg');
         const modal = document.getElementById('modal');
         const modalImg = document.getElementById('modalImg');
         const closeBtn = document.querySelector('.close');
 
-        // 画像をクリック → モーダル開く
+        /* ------------------------------
+           画像クリック → モーダルを開く
+        ------------------------------ */
         img.addEventListener('click', () => {
             modalImg.src = img.src;
             modal.style.display = 'flex';
         });
 
-        // モーダル背景クリックで閉じる
+        /* ------------------------------
+           モーダル背景クリック → 閉じる
+        ------------------------------ */
         modal.addEventListener('click', () => {
             modal.style.display = 'none';
         });
 
-        // × ボタンで閉じる（イベント伝播を止める）
+        /* ------------------------------
+           × ボタンで閉じる
+        ------------------------------ */
         closeBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             modal.style.display = 'none';

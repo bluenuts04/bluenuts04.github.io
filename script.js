@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // -------------------------
     // 1. スムーズスクロール
     // -------------------------
+      // a[href^="#"] = ページ内リンクだけ取得
+      // クリックしたらその位置までゆっくりスクロール(ヘッダー内のABOUT等選択すると、そのブロックへ移行)
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', e => {
             const target = document.querySelector(link.getAttribute('href'));
@@ -19,7 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // -------------------------
     // 2. ヘッダー縮小
+     // 50px以上スクロールすると .active を追加 → ヘッダーが縮む
     // -------------------------
+     
     const header = document.querySelector('.header');
     if (header) {
         window.addEventListener('scroll', () => {
@@ -29,30 +33,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // -------------------------
     // 3. スクロールふわっと表示
+     // 画面に入ったら .show を付けてフェードイン
     // -------------------------
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) entry.target.classList.add('show');
         });
-    }, { threshold: 0.12 });
-
+    }, { threshold: 0.12 });// 画面の12%見えたら発火
+     // ふわっと表示させる対象一覧
     document.querySelectorAll('.section, .hero, .card, .my-photo').forEach(el => {
         observer.observe(el);
     });
 
     // -------------------------
-    // 4. カレンダー表示
+    // 4. カレンダー表示（カードクリック）
     // -------------------------
     const calendarBtn = document.getElementById("open-calendar");
     const calendarSection = document.getElementById("calendar-section");
     if (calendarBtn && calendarSection) {
         calendarBtn.addEventListener("click", () => {
-            showSection("calendar-section");
+            showSection("calendar-section");// 後ろの共通関数で表示切替
         });
     }
 
     // -------------------------
-    // 5. 画像拡大モーダル
+    // 5. 画像拡大モーダル（クリックした画像をフルスクリーンに表示）
     // -------------------------
     const modal = document.createElement('div');
     modal.id = 'img-modal';
@@ -67,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         justify-content:center;
         align-items:center;
     `;
-
+     // モーダル内に表示する画像
     const modalImg = document.createElement('img');
     modalImg.style.cssText = `
         max-width:90%;
@@ -75,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
         border-radius:10px;
         box-shadow:0 2px 8px rgba(0,0,0,0.6);
     `;
-
+     // 閉じるボタン（×）
     const closeBtn = document.createElement('span');
     closeBtn.textContent = '×';
     closeBtn.style.cssText = `
@@ -88,29 +93,29 @@ document.addEventListener("DOMContentLoaded", () => {
         z-index:1300;
         user-select:none;
     `;
-
+     // モーダルに画像と×ボタンを追加
     modal.appendChild(modalImg);
     modal.appendChild(closeBtn);
     document.body.appendChild(modal);
-
+     // 全ての画像に「クリック→モーダル表示」を適用（ロゴ除く）
     document.querySelectorAll('img:not(.logo-img)').forEach(img => {
         img.style.cursor = 'pointer';
         img.addEventListener('click', () => {
             if (!img.src) return;
-            modalImg.src = img.src;
+            modalImg.src = img.src;// モーダルに画像設定
             modal.style.display = 'flex';
             modal.style.visibility = 'visible';
         });
     });
-
+      // 閉じる動作
     const hideModal = () => {
         modal.style.display = 'none';
         modal.style.visibility = 'hidden';
         modalImg.src = '';
     };
-
+     // 背景クリックでも閉じる
     modal.addEventListener('click', hideModal);
-    closeBtn.addEventListener('click', e => {
+    closeBtn.addEventListener('click', e => {// × を押した時（イベント伝播停止で誤爆防止）
         e.stopPropagation();
         hideModal();
     });
