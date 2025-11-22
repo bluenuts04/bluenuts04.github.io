@@ -36,13 +36,13 @@ body {
 
 /* ===== お知らせバー ===== */
 .notice-bar {
-    background: #ffed91;           /* 明るい黄色で目立たせる */
+    background: #f7d54a;           /* 明るい黄色で目立たせる */
     text-align: center;            /* テキストを中央揃え */
     font-weight: bold;             /* 文字を太く */
-    padding: 5px;                 /* 上下10px の余白 */
+    padding: 0.1px;                 /* 上下10px の余白 */
     position: relative;            /* z-index を有効にするために必要 */
     z-index: 1000;                 /* 動画や他の要素より上に表示 */
-    width: 100%;                   /* 横幅いっぱいに表示 */
+
 }
 
 /* ▼ ヒーロー全体（動画を背景にする大きいヘッダー部分） ---------------------- */
@@ -92,7 +92,7 @@ body {
 
 /* ===== セクション ===== */
 .section { 
-    padding: 60px 20px;     /* 上下60px・左右20px の余白を確保 → 全体が見やすくなる */
+    padding: 20px 20px;     /* 上下20px・左右20px の余白を確保 → 全体が見やすくなる */
     text-align: center;     /* セクション内の文字を中央寄せにする */
 }
 
@@ -107,6 +107,24 @@ body {
 .my-photo {
     opacity: 1 !important;             /* 透明度を常に100%にしてアニメーション無効化 */
     transform: translateY(0) !important; /* Y方向の移動を常に0（元の位置）に固定 */
+}
+/* ===== セクション別背景(ABOUT) ===== */
+#about.section {
+    background: linear-gradient(135deg, #beb5f1, #dbdde3);
+    padding: 5px 20px;
+    border-radius: 12px;
+}
+/* ===== セクション別背景(SERVICES) ===== */
+#services.section {
+    background: linear-gradient(135deg, #b2e5ef, #d7d8d1);
+    padding: 10px 20px; 
+    border-radius: 12px;
+}
+/* ===== セクション別背景(CONTACT) ===== */
+#contact.section {
+    background: linear-gradient(135deg, #c5ebf3, #b3b4af);
+    padding: 20px 20px; 
+    border-radius: 12px;
 }
 
 /* ▼ カード共通デザイン -------------------------------------- */
