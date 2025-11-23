@@ -30,6 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
             header.classList.toggle('active', window.scrollY > 50);
         });
     }
+    // ハンバーガー メニュー
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("navMenu");
+
+    hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+    });
 
     // -------------------------
     // 3. スクロールふわっと表示
@@ -341,4 +348,5 @@ document.addEventListener("DOMContentLoaded", () => {
         // 自動再生
         timer = setInterval(nextSlide, 3000);
     }
+
 });

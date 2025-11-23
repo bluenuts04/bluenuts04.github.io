@@ -12,9 +12,16 @@
 
 <header class="header">
     <h1 class="logo"><img src="images/logo.jpg" alt="Valdio ロゴ" class="logo-img"></h1>
+    <!-- ハンバーガー -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
     <nav class="nav">
         <a href="#about">ABOUT</a>
         <a href="#services">SERVICES</a>
+        <a href="#product">PRODUCT</a>
         <a href="#contact">CONTACT</a>
     </nav>
 </header>
@@ -47,9 +54,13 @@
     <h2>SERVICES</h2>
     <div class="cards">
         <div class="card" id="open-calendar">📅スケジュール⚽</div>
-        <div class="card" id="open-play-photo">🖼️プレイ写真⚽</div>
-        <div class="card" id="open-video">📹プレイ動画⚽</div>
         <div class="card" id="open-activity-log">📖活動実績⚽</div>
+        <div class="card" id="open-video">📹プレイ動画⚽</div>
+        <div class="card" id="open-play-photo">🖼️プレイ写真⚽</div>
+
+        <div class="card" id="tactics">🏃‍♂️戦術⚽</div>
+        <div class="card" id="technic">👣テクニック集⚽</div>
+        
         <div class="card" id="open-gourmet">大田区グルメ🍚</div>
         <a href="danger.html" class="card">不審者情報🥷</a>
     </div>
@@ -81,7 +92,7 @@
 </section>
 
 <section id="video-gallery" class="section" style="display:none;">
-  <h2>ショット動画ギャラリー</h2>
+  <h2>ショート動画ギャラリー</h2>
   <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
     <video width="320" height="180" controls>
       <source src="videos/shot1.mp4" type="video/mp4">
@@ -104,7 +115,8 @@
 </section>
 
 <img src="images/photo1.jpg" alt="写真" class="my-photo">
-
+<section id="product" class="section product">
+    <h2>PRODUCT</h2>
 <section id="contact" class="section contact">
     <h2>CONTACT</h2>
     <p>Email: sample@example.com</p>
@@ -132,11 +144,12 @@
             <h4>MENU</h4>
             <a href="#about">ABOUT</a>
             <a href="#services">SERVICES</a>
+            <a href="#product">PRODUCT</a>
             <a href="#contact">CONTACT</a>
         </div>
 
         <div class="footer-social">
-            <h4>FOLLOW US</h4>
+            <h4>FOLLOW US(準備中)</h4>
             <a href="https://www.instagram.com/" target="_blank">Instagram</a>
             <a href="https://x.com/" target="_blank">X (Twitter)</a>
             <a href="https://youtube.com/" target="_blank">YouTube</a>
