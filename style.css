@@ -40,11 +40,13 @@ body {
 /* ===== お知らせ行（画面横いっぱいの帯） ===== */
 .notice-row {
     background-color: #bde60b; /* 黄色帯 */
+    
     padding: 4px 16px;
-    width: 100%;
+    width: 100%;               /* 画面幅いっぱい */
     display: flex;
     align-items: center;
     gap: 4px;
+    box-sizing: border-box;    /* パディング込みで100%になるように */
 }
 
 /* お知らせタイトル部分 */
@@ -59,6 +61,8 @@ body {
 /* お知らせ本文 */
 .notice-text {
     font-size: 16px;
+    color: #3f0df3;
+    font-weight: bold;
 }
 
 /* ===== 通常の背景 ===== */
@@ -274,7 +278,7 @@ img {
 .gourmet-slider-wrapper, .photo-slider-wrapper {
     position: relative;   /* 矢印ボタン（← →）をこの枠の中で絶対配置するため */
     overflow: hidden;     /* スライドが横に飛び出さないように隠す */
-    max-width: 90%;       /* 横幅を画面の90%以内に収める（スマホでも見やすい） */
+    max-width: 100%;       /* 横幅を画面の90%以内に収める（スマホでも見やすい） */
     margin: 0 auto;       /* 中央配置 */
 }
 
@@ -282,6 +286,7 @@ img {
 .gourmet-slider, .photo-slider {
     display: flex;                 /* 画像を横一列に並べる */
     transition: transform 0.8s ease;  /* スライド時のアニメーション（0.8秒で移動） */
+    width: 100%;            /* 親幅に合わせる */
 }
 
 /* ===== 各スライドアイテム（一枚の画像枠） ===== */
@@ -295,6 +300,7 @@ img {
 /* ===== 各スライド画像 ===== */
 .gourmet-item img, .photo-item img {
     width: 100%;         /* 親枠に画像をピッタリ合わせる */
+    height: auto;
     display: block;      /* 下に隙間ができないように block 化 */
     border-radius: 8px;  /* 画像も角丸に合わせる */
 }
