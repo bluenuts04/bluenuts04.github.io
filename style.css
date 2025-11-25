@@ -36,17 +36,36 @@ body {
     width:auto;                    /* 画像比率を維持 */
 }
 
-/* ===== お知らせバー ===== */
-.notice-bar {
-    background: #f7d54a;           /* 明るい黄色で目立たせる */
-    text-align: center;            /* テキストを中央揃え */
-    font-weight: bold;             /* 文字を太く */
-    padding: 0.1px;                 /* 上下10px の余白 */
-    position: relative;            /* z-index を有効にするために必要 */
-    z-index: 1000;                 /* 動画や他の要素より上に表示 */
 
+/* ===== お知らせ行（画面横いっぱいの帯） ===== */
+.notice-row {
+    background-color: #bde60b; /* 黄色帯 */
+    padding: 4px 16px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
+/* お知らせタイトル部分 */
+.notice-title {
+    background-color: #bde60b;
+    color: #3f0df3;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* お知らせ本文 */
+.notice-text {
+    font-size: 16px;
+}
+
+/* ===== 通常の背景 ===== */
+.normal-content {
+    background: #ffffff; /* お知らせ帯の下は別色 */
+    padding: 0px 6px;
+}
 /* ▼ ヒーロー全体（動画を背景にする大きいヘッダー部分） ---------------------- */
 .hero {
     position: relative;        /* 子要素（動画やオーバーレイ）を重ねるための基準にする */
