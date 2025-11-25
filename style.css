@@ -119,7 +119,15 @@ body {
 .section { 
     padding: 20px 20px;     /* 上下20px・左右20px の余白を確保 → 全体が見やすくなる */
     text-align: center;     /* セクション内の文字を中央寄せにする */
+
 }
+#about {
+    margin-bottom: 10px;
+}
+#services {
+    margin-bottom: 10px;
+}
+
 
 /* 
    本来はスクロール時のアニメーション用に
@@ -136,13 +144,13 @@ body {
 /* ===== セクション別背景(ABOUT) ===== */
 #about.section {
     background: linear-gradient(135deg, #beb5f1, #dbdde3);
-    padding: 5px 20px;
+    padding: 20px 20px;
     border-radius: 12px;
 }
 /* ===== セクション別背景(SERVICES) ===== */
 #services.section {
     background: linear-gradient(135deg, #b2e5ef, #d7d8d1);
-    padding: 10px 20px; 
+    padding: 20px 20px; 
     border-radius: 12px;
 }
 /* ===== セクション別背景(CONTACT) ===== */
@@ -238,10 +246,10 @@ img {
 }
 
 .concept-content p {
-    margin: 0;
+    margin: 0;/* 段落の上下左右の余白をなくす */
     font-size: 24px;
     font-weight: bold;
-    line-height: 1.5;
+    line-height: 1.5; /* 行間をほどよく広げる（1.5倍） */
 }
 
 /* ===== 秘密画像 ===== *secret.html/
