@@ -292,7 +292,8 @@ img {
 /* ===== 各スライドアイテム（一枚の画像枠） ===== */
 .gourmet-item, .photo-item {
     min-width: 200px;    /* 画像の最低横幅 → スマホでもサイズが安定 */
-    margin-right: 16px;  /* スライド同士の間隔 */
+    margin-right: 0;  /* スライド同士の間隔 */
+    flex: 0 0 100%;  /* 幅100%で1枚ずつ表示 */
     border-radius: 8px;  /* 画像の角を丸くして見た目を良くする */
     overflow: hidden;    /* はみ出た部分を隠す（角の丸みを活かすため） */
 }
