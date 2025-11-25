@@ -9,7 +9,7 @@ body {
 .header {
     display: flex;                 /* 横並びレイアウトにする（ロゴ＋ナビ） */
     justify-content: space-between;/* 左右に要素を配置し広げる */
-    padding: 0px 32px;            /* 上下16px、左右32px の余白 */
+    padding: 16px 32px;            /* 上下16px、左右32px の余白 */
     background: #fffbfb;           /* ほぼ白の背景色 */
     transition: 0.3s ease;         /* スクロール時の縮小アニメーションを滑らかにする */
 }
@@ -426,23 +426,23 @@ img {
        ▼ ハンバーガーメニュー（スマホで表示）
        ------------------------------------------------------ */
     .nav {
-        position: absolute;
-        top: 70px;
-        right: 20px;
-        background: white;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        position: absolute;  /* 画面の通常の流れから外し、自由に配置できるようにする */
+        top: 10px;/* ヘッダーのすぐ下に配置（ヘッダー高さ分ずらす） */
+        right: 80px;/* 右端から20pxの位置に配置する */
+        background: white;/* メニューの背景色を白に */
+        padding: 5px 20px; /* 内側の余白（上下左右）を広めに取って押しやすく */
+        border-radius: 12px; /* 角を丸くして、カードのような柔らかいデザインにする */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);/* ボックスに影をつけて浮かせる（ドロップダウンっぽく見える） */
         display: none;            /* 初期は閉じる */
-        flex-direction: column;
-        gap: 12px;
-        z-index: 999;
+        flex-direction: column; /* メニュー（ABOUT / SERVICEなど）を縦並びにする */
+        gap: 6px; /* 各項目の間に12pxの間隔を作る */
+        z-index: 999; /* 他の要素より前面に表示（動画や画像に隠れないように） */
     }
 
     /* ▼ メニューリンクの見た目 */
     .nav a {
         font-size: 18px;
-        padding: 6px 0;
+        padding: 12px 0;
     }
 
     /* ▼ ハンバーガーアイコン（スマホで表示） */
