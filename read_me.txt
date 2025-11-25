@@ -1,11 +1,10 @@
-勉強用に自由に使えて、VSCodeで開いてリアルタイムで見れる無料のホームページ雛形一式シンプルだけど、ちゃんとしたサイトの形になってるやつ。
+■ディクトリ構成
 
-中身は
 index.html
 style.css
 script.js
 images（フォルダ）
-の4点セット。
+moviess（フォルダ）
 
 HP_勉強 
 ├ images 
@@ -33,19 +32,14 @@ VSCode内にプレビューを置く（同じ画面でコードと確認）
 
 VSCode を起動
 
-File → Open Folder... で、先ほどの「勉強用サンプル」フォルダ（index.html があるフォルダ）を選択
-
-エクスプローラー（左ペイン）に index.html, style.css, script.js が見えるはず
+File → Open Folder... で、ローカルフォルダを開く
+エクスプローラー（左ペイン）に index.html, style.css, script.js が表示
 
 2) Live Server でローカルプレビュー（自動リロード）
 手順（GUI）
-
 index.html をクリックして開く（タブで表示）
-
 右下に青いボタン Go Live が見える → クリック
-
 ブラウザが自動で開いて http://127.0.0.1:5500/（または http://localhost:5500/）が表示される
-
 VSCode で style.css や index.html を編集して保存（Ctrl+S）すると、ブラウザが自動でリロードされる
 
 手順（右クリック）
