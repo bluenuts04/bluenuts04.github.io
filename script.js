@@ -350,3 +350,87 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
+// =============================
+//  多言語切替システム（JP / EN）
+// =============================
+const translations = {
+    jp: {
+        hero_title: "ようこそ、Valdio(ヴァルディオ)へ",
+        hero_desc: "東京都 大田区 蒲田を拠点としている<br>アマチュアのフットサル集団",
+
+        about: "ABOUT",
+        services: "SERVICES",
+        product: "PRODUCT",
+        contact: "CONTACT",
+
+        notice_title: "📢【お知らせ】",
+        contact_name: "名前",
+        contact_email: "メール",
+        contact_subject: "件名",
+        contact_message: "内容",
+        contact_send: "送信",
+
+        about_team_name: "チーム名の由来",
+        about_team_concept: "チームコンセプト",
+        about_member: "メンバーの雰囲気",
+        about_activity: "主な活動",
+        about_notes: "注意事項",
+
+        services_calendar: "📅スケジュール⚽",
+        services_log: "📖活動実績⚽",
+        services_video: "📹プレイ動画⚽",
+        services_photo: "🖼️プレイ写真⚽",
+        services_tactics: "🏃‍♂️戦術⚽",
+        services_technic: "👣テクニック集⚽",
+        services_gourmet: "大田区グルメ🍚",
+        services_alert: "不審者情報🥷"
+    },
+
+    en: {
+        hero_title: "Welcome to Valdio",
+        hero_desc: "An amateur futsal team based in Kamata, Ota-ku, Tokyo",
+
+        about: "ABOUT",
+        services: "SERVICES",
+        product: "PRODUCT",
+        contact: "CONTACT",
+
+        notice_title: "📢[NOTICE]",
+        contact_name: "Name",
+        contact_email: "Email",
+        contact_subject: "Subject",
+        contact_message: "Message",
+        contact_send: "Send",
+
+        about_team_name: "Origin of the Team Name",
+        about_team_concept: "Team Concept",
+        about_member: "Team Atmosphere",
+        about_activity: "Main Activities",
+        about_notes: "Notes",
+
+        services_calendar: "📅Schedule⚽",
+        services_log: "📖Activity Log⚽",
+        services_video: "📹Play Videos⚽",
+        services_photo: "🖼️Play Photos⚽",
+        services_tactics: "🏃‍♂️Tactics⚽",
+        services_technic: "👣Techniques⚽",
+        services_gourmet: "Ota Ward Gourmet🍚",
+        services_alert: "Suspicious Person Info🥷"
+    }
+};
+
+// 言語切替
+function switchLang(lang) {
+    document.querySelectorAll("[data-key]").forEach(el => {
+        const key = el.getAttribute("data-key");
+        el.innerHTML = translations[lang][key];
+    });
+
+    // active 表示
+    document.getElementById("langJP").classList.toggle("active", lang === "jp");
+    document.getElementById("langEN").classList.toggle("active", lang === "en");
+}
+
+document.getElementById("langJP").addEventListener("click", () => switchLang("jp"));
+document.getElementById("langEN").addEventListener("click", () => switchLang("en"));
