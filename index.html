@@ -52,7 +52,6 @@
 
 <div class="normal-content">
     <p> 次回大会は 12/27(土)　ウルトラビギナー大会⚽  目指せ初勝利！</p>
-    
 </div>
 
 
@@ -72,10 +71,8 @@
         <div class="card" id="open-activity-log">📖活動実績⚽</div>
         <div class="card" id="open-video">📹プレイ動画⚽</div>
         <div class="card" id="open-play-photo">🖼️プレイ写真⚽</div>
-
-        <div class="card" id="tactics">🏃‍♂️戦術⚽</div>
-        <div class="card" id="technic">👣テクニック集⚽</div>
-        
+        <div class="card" id="open-tactics">🏃‍♂️戦術⚽</div>
+        <div class="card" id="open-technic">👣テクニック集⚽</div>
         <div class="card" id="open-gourmet">大田区グルメ🍚</div>
         <a href="danger.html" class="card">不審者情報🥷</a>
     </div>
@@ -118,6 +115,22 @@
   </div>
 </section>
 
+<section id="tactics-section" class="section" style="display:none;">
+    <h2>戦術</h2>
+    <div class="tactics" id="tactics-pop">
+        <p>ここにポップアップでランダムにキーワードを表示したい</p>
+        <p>アラ、フィクソ、ピヴォ、1-2-1,2-2,点を取って守り切る</p>
+        <!-- JSで追加も可能 -->
+    </div>
+</section>
+<section id="technic-section" class="section" style="display:none;">
+    <h2>テクニック集</h2>
+    <div class="technic" id="technic-pop">
+        <p>ここにポップアップでランダムにキーワードを表示したい</p>
+        <p>ドリブル、パス、シュート</p>
+        <!-- JSで追加も可能 -->
+    </div>
+</section>
 <section id="gourmet-section" class="section" style="display:none;">
     <h2>大田区の美味い飯</h2>
     <div class="gourmet-slider-wrapper">
@@ -134,21 +147,23 @@
 <section id="product" class="section product">
     <h2>PRODUCT</h2>
     <p>Valdioオフィシャルグッズ販売はこちら</p>
+    <a href="goods.html" class="card">オフィシャルグッズストア</a>
+
 
 <!-- FAQ -->
 <section id="faq" class="section faq">
     <h2>FAQ</h2>
     <details>
-     <summary>見積もりは無料ですか？</summary>
-     <p>はい、初回相談と簡易見積もりは無料で対応しております。</p>
+     <summary>チームの練習日や大会日程は？</summary>
+     <p>基本、個サルで各自、練習です。要望があれば、イベント開催します。</p>
     </details>
     <details>
-     <summary>納期はどのくらいですか？</summary>
-     <p>プロジェクト規模によりますが、一般的なコーポレートサイトは2〜8週間が目安です。</p>
+     <summary>年会費や参加費はいくら？</summary>
+     <p>年会費はありません。チーム参加、大会の当日に都度、現金かPayPayで集金します</p>
     </details>
     <details>
-     <summary>保守対応は可能ですか？</summary>
-     <p>はい、月次の保守プランやスポット対応まで柔軟に承ります。</p>
+     <summary>チームへ加入するにはどうしたらいい？</summary>
+     <p>メンバーへ連絡や下記コンタクトフォームにて、ご連絡ください</p>
     </details>
 </section>
 
@@ -161,7 +176,23 @@
     </div>
       <p>Email: sample@example.com</p>
     <form id="contactForm">
+
+
         <div class="form-group">
+         <label for="category" class="form-label">
+          お問い合わせ種別
+         </label>
+         <select class="form-control" id="category" name="category">
+          <option value="">選択してください</option>
+          <option value="general">1.チームに入りたい</option>
+          <option value="technical">2.対戦相手募集</option>
+          <option value="business">3.チーム参加費について</option>
+          <option value="bug">4.一般的なお問い合わせ</option>
+          <option value="feature">5.機能要望</option>
+          <option value="other">6.その他</option>
+         </select>
+        </div>
+                <div class="form-group">
          <label for="name" class="form-label">
           お名前 <span class="required">*</span>
          </label>
@@ -180,21 +211,6 @@
           件名 <span class="required">*</span>
          </label>
          <input type="text" class="form-control" id="subject" name="subject" required maxlength="100">
-        </div>
-
-        <div class="form-group">
-         <label for="category" class="form-label">
-          お問い合わせ種別
-         </label>
-         <select class="form-control" id="category" name="category">
-          <option value="">選択してください</option>
-          <option value="general">チームに入りたい</option>
-          <option value="technical">対戦相手募集</option>
-          <option value="business">チーム参加費について</option>
-          <option value="bug">一般的なお問い合わせ</option>
-          <option value="feature">機能要望</option>
-          <option value="other">その他</option>
-         </select>
         </div>
         <div class="form-group">
          <label for="message" class="form-label">

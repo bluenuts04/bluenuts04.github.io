@@ -224,7 +224,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // カード ごとの表示切替
     // -----------------------------------
     const showSection = (id) => {
-        const sections = ["calendar-section", "play-photo-section", "video-gallery", "gourmet-section", "activity-log-section"];
+        const sections = ["calendar-section", "play-photo-section", "video-gallery", "tactics-section","technic-section","gourmet-section", "activity-log-section"];
         sections.forEach(s => document.getElementById(s).style.display = s === id ? "block" : "none");
         // 自動スクロール
         const target = document.getElementById(id);
@@ -244,6 +244,8 @@ document.addEventListener("DOMContentLoaded", () => {
             { img:"images/play4.jpg" }
         ], "photoPrev", "photoNext");
     });
+    document.getElementById("open-tactics")?.addEventListener("click", () => showSection("tactics-section"));
+    document.getElementById("open-technic")?.addEventListener("click", () => showSection("technic-section"));
     document.getElementById("open-gourmet")?.addEventListener("click", () => {
         showSection("gourmet-section");
         setupInfiniteSlider("gourmetSlider", [
@@ -256,6 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ], "gourmetPrev", "gourmetNext");
     });
 
+    
     // ===================================
     //  8. 無限ループスライダー共通関数
     // ===================================

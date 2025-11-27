@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>オフィシャルグッズストア</title>
+
+    <style>
+        /* ------------------------------
+           ページ全体の基本デザイン
+        ------------------------------ */
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background-color: #f0f4ef;
+        }
+        /* ------------------------------
+           中央の白いカード部分
+        ------------------------------ */
+        .section {
+            background-color: #e1e7e2;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 2px 8px rgba(184, 11, 11, 0.1);
+        }
+        /* ------------------------------
+           不審者画像（クリックで拡大）
+        ------------------------------ */
+        img {
+            max-width: 90%;
+            border-radius: 10px;
+            display: block;
+            margin: 20px auto;
+            cursor: pointer;
+        }
+        /* ------------------------------
+           戻るボタン
+        ------------------------------ */
+        .back-btn {
+            display: inline-block;
+            padding: 10px 18px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+
+        .back-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* ------------------------------
+           モーダル（拡大画像の背景）
+        ------------------------------ */
+        #modal {
+            display: none;  /* 初期は非表示 */
+            position: fixed; /* 画面固定 */
+            z-index: 1000;  /* 最前面に表示 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);/* 半透明の黒背景 */
+
+            justify-content: center;/* ★ 重要：中央に配置するために必要 */
+            align-items: center;
+        }
+        /* ------------------------------
+           モーダル内の拡大画像
+        ------------------------------ */
+        #modalImg {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        /* ------------------------------
+           ×（閉じるボタン）
+        ------------------------------ */
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==========================
+         戻るボタン
+    =========================== -->
+    <a href="index.html" class="back-btn">← 戻る</a>
+    <!-- ==========================
+         メイン内容
+    =========================== -->
+    <section class="section">
+        <h2>Valdio オフィシャルグッズ販売</h2>
+        <p>通貨はギルになります</p>
+
+        <!-- ▼ クリックすると拡大される画像 -->
+        <img id="goodsImg" src="images/goods1.png" alt="ウェア1">
+        <img id="goodsImg" src="images/goods2.jpg" alt="ウェア2">
+        <img id="goodsImg" src="images/goods3.jpg" alt="ウェア3">
+        <img id="goodsImg" src="images/goods4.jpg" alt="ウェア4">
+        <img id="goodsImg" src="images/goods5.jpg" alt="ウェア5">
+        <img id="goodsImg" src="images/goods6.jpg" alt="ウェア6">
+        <img id="goodsImg" src="images/goods7.jpg" alt="ウェア7">
+        <img id="goodsImg" src="images/goods8.jpg" alt="ウェア8">
+        <img id="goodsImg" src="images/goods9.jpg" alt="ウェア9">
+        <img id="goodsImg" src="images/goods10.jpg" alt="ウェア10">
+    </section>
+
+    <!-- ==========================
+         モーダル（画像拡大表示）
+    =========================== -->
+    <div id="modal">
+        <span class="close">&times;</span>
+        <img id="modalImg">
+    </div>
+
+    <script>
+    /* ------------------------------
+           必要な要素の取得
+    ------------------------------ */
+        const img = document.getElementById('dangerImg');
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modalImg');
+        const closeBtn = document.querySelector('.close');
+
+        /* ------------------------------
+           画像クリック → モーダルを開く
+        ------------------------------ */
+        img.addEventListener('click', () => {
+            modalImg.src = img.src;
+            modal.style.display = 'flex';
+        });
+
+        /* ------------------------------
+           モーダル背景クリック → 閉じる
+        ------------------------------ */
+        modal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        /* ------------------------------
+           × ボタンで閉じる
+        ------------------------------ */
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            modal.style.display = 'none';
+        });
+
+        // 画像自身をクリックしても閉じないようにする
+        modalImg.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    </script>
+
+</body>
+
+</html>
