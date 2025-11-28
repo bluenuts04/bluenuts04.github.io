@@ -29,27 +29,19 @@ VSCode内にプレビューを置く（同じ画面でコードと確認）
 ではステップごとに実演的に行くよ — ボタンの場所とコマンド両方書くから、そのままコピペ＆クリックOK。
 
 1) プロジェクトを開く（VSCode）
-
-VSCode を起動
-
 File → Open Folder... で、ローカルフォルダを開く
 エクスプローラー（左ペイン）に index.html, style.css, script.js が表示
 
-2) Live Server でローカルプレビュー（自動リロード）
-手順（GUI）
+2) Live Server でローカルプレビュー（自動リロード）手順（GUI）
 index.html をクリックして開く（タブで表示）
 右下に青いボタン Go Live が見える → クリック
 ブラウザが自動で開いて http://127.0.0.1:5500/（または http://localhost:5500/）が表示される
 VSCode で style.css や index.html を編集して保存（Ctrl+S）すると、ブラウザが自動でリロードされる
 
 手順（右クリック）
-
 index.html の編集領域で右クリック → Open with Live Server
-
 ポートやルートを変えたいとき（オプション）
-
 コマンドパレット（Ctrl+Shift+P）→ Preferences: Open Settings (JSON) に下を追加してポート変更できます：
-
 "liveServer.settings.port": 5501,
 "liveServer.settings.root": "/"
 
@@ -58,7 +50,6 @@ index.html の編集領域で右クリック → Open with Live Server
 ブラウザを使わず VSCode 内で同じ画面にプレビューを配置する方法。
 
 A. Simple Browser を使う（拡張機能が必要）
-
 拡張機能から Simple Browser をインストール
 
 Ctrl+Shift+P → Simple Browser: Show を選ぶ

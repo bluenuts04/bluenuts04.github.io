@@ -382,6 +382,8 @@ img {
     gap: 20px;
     justify-content: center;
     margin-bottom: 20px;
+    position: relative;
+    z-index: 10; /* ← 最前面にする */
 }
 
 .contact-btn {
@@ -391,6 +393,8 @@ img {
     font-weight: bold;
     cursor: pointer;
     border: none;
+    z-index: 10;
+    position: relative;
 }
 
 .line-btn {
