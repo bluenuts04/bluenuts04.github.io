@@ -169,62 +169,59 @@
 
 
 <section id="contact" class="section contact">
-   
-    <div class="form-header"></div>
-      <h2>CONTACT</h2>
-      <p>ご質問やご要望がございましたら、お気軽にお問い合わせください。</p>
+    <h2>CONTACT</h2>
+    <p>お問い合わせ方法をお選びください。</p>
+
+    <!-- ▼ ここが2択の問い合わせ方法 -->
+    <div class="contact-select">
+        <button id="contactLine" class="contact-btn line-btn">LINEで問い合わせ</button>
+        <button id="contactMail" class="contact-btn mail-btn">メールで問い合わせ</button>
     </div>
-      <p>Email: sample@example.com</p>
-    <form id="contactForm">
 
+    <!-- ▼ メールフォーム（最初は非表示） -->
+    <div id="mailFormWrapper" style="display:none; margin-top:20px;">
 
-        <div class="form-group">
-         <label for="category" class="form-label">
-          お問い合わせ種別
-         </label>
-         <select class="form-control" id="category" name="category">
-          <option value="">選択してください</option>
-          <option value="general">1.チームに入りたい</option>
-          <option value="technical">2.対戦相手募集</option>
-          <option value="business">3.チーム参加費について</option>
-          <option value="bug">4.一般的なお問い合わせ</option>
-          <option value="feature">5.機能要望</option>
-          <option value="other">6.その他</option>
-         </select>
-        </div>
-                <div class="form-group">
-         <label for="name" class="form-label">
-          お名前 <span class="required">*</span>
-         </label>
-         <input type="text" class="form-control" id="name" name="name" required maxlength="50">
-        </div>
+        <p>Email: sample@example.com</p>
 
-        <div class="form-group">
-         <label for="email" class="form-label">
-          メールアドレス <span class="required">*</span>
-         </label>
-         <input type="email" class="form-control" id="email" name="email" required maxlength="100">
-        </div>
+        <form id="contactForm">
 
-        <div class="form-group">
-         <label for="subject" class="form-label">
-          件名 <span class="required">*</span>
-         </label>
-         <input type="text" class="form-control" id="subject" name="subject" required maxlength="100">
-        </div>
-        <div class="form-group">
-         <label for="message" class="form-label">
-           メッセージ <span class="required">*</span>
-         </label>
-         <textarea class="form-control" id="message" name="message" rows="5" required maxlength="1000"></textarea>
-        </div>
+            <div class="form-group">
+                <label for="category" class="form-label">お問い合わせ種別</label>
+                <select class="form-control" id="category" name="category">
+                    <option value="">選択してください</option>
+                    <option value="general">1.チームに入りたい</option>
+                    <option value="technical">2.対戦相手募集</option>
+                    <option value="business">3.チーム参加費について</option>
+                    <option value="bug">4.一般的なお問い合わせ</option>
+                    <option value="feature">5.機能要望</option>
+                    <option value="other">6.その他</option>
+                </select>
+            </div>
 
-        <button type="submit" class="btn-submit">
-          送信する
-        </button>
-    </form>
-    
-  
+            <div class="form-group">
+                <label for="name" class="form-label">お名前 <span class="required">*</span></label>
+                <input type="text" class="form-control" id="name" name="name" required maxlength="50">
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">メールアドレス <span class="required">*</span></label>
+                <input type="email" class="form-control" id="email" name="email" required maxlength="100">
+            </div>
+
+            <div class="form-group">
+                <label for="subject" class="form-label">件名 <span class="required">*</span></label>
+                <input type="text" class="form-control" id="subject" name="subject" required maxlength="100">
+            </div>
+
+            <div class="form-group">
+                <label for="message" class="form-label">メッセージ <span class="required">*</span></label>
+                <textarea class="form-control" id="message" name="message" rows="5" required maxlength="1000"></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">送信する</button>
+        </form>
+    </div>
+
 </section>
 
 <script src="script.js"></script>

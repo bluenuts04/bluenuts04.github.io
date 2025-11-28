@@ -377,6 +377,31 @@ img {
 /* ===== Contactフォーム ===== */
 /* お問い合わせフォームのスタイル */
 
+.contact-select {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.contact-btn {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+
+.line-btn {
+    background: #06C755; /* LINEカラー */
+    color: white;
+}
+
+.mail-btn {
+    background: #007bff;
+    color: white;
+}
 
 .form-group {
   margin-bottom: 0.5rem;

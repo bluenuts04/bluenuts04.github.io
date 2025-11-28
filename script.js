@@ -351,6 +351,25 @@ document.addEventListener("DOMContentLoaded", () => {
         // 自動再生
         timer = setInterval(nextSlide, 3000);
     }
+    // =============================
+    //  問い合わせフォーム
+    // =============================
+    // ▼ LINEボタン
+    document.getElementById("contactLine").addEventListener("click", function () {
+       window.open("https://lin.ee/S4Tg4D6", "_blank");
+    });
+
+    // ▼ メールボタン
+    document.getElementById("contactMail").addEventListener("click", function () {
+       // メールフォームを表示
+       document.getElementById("mailFormWrapper").style.display = "block";
+
+       // 自動スクロール（使いやすい）
+       document.getElementById("mailFormWrapper").scrollIntoView({
+          behavior: "smooth"
+        });
+    });
+
 
 });
 
