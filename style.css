@@ -3,7 +3,8 @@
 ================================ */
 /* =====body===== */
 body {
-    margin: 0;                     /* 画面の余白をゼロにしてフル幅で表示 */
+    margin: 10px;                     /* 画面の余白を0pxにしてフル幅で表示 */
+    
     font-family: sans-serif;       /* 全体のフォントをサンセリフ体に統一 */
     color: #333;                   /* 文字色を濃いグレーに設定（黒より少し柔らかい） */
 }
@@ -138,14 +139,20 @@ body {
     text-align: center;     /* セクション内の文字を中央寄せにする */
 
 }
-#about {
-    margin-bottom: 10px; /* 下に10pxスペースを作る */
+#about h2,
+#services h2,
+#product h2,
+#contact h2,
+#faq h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
 }
+
 /* ABOUT セクションの項目をボタン風にする */
 #about .link-like {
     display: block;                /* ブロック化して全幅クリック可能 */
     padding: 10px 10px;            /* 内側の余白 */
-    margin: 10px 0;                /* 上下にすき間 */
+    margin: 10px 10px;                /* 上下にすき間 */
     background: #6caff3;           /* ボタンの背景色 */
     color: #fcf9f9;                   /* 文字色 */
     border: 2px solid #07a4f3;     /* 青フチ */
@@ -163,10 +170,6 @@ body {
     color: #fff;
     transform: translateY(-3px);   /* 少し浮く演出 */
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-#services {
-    margin-bottom: 10px;/* 下に10pxスペースを作る */
 }
 
 /* 
@@ -188,12 +191,85 @@ body {
     border-radius: 12px;/* セクションの角を少し丸くする */
   
 }
+#about {
+    margin-bottom: 10px; /* 下に10pxスペースを作る */
+}
 /* ===== セクション別背景(SERVICES) ===== */
 #services.section {
     background: linear-gradient(135deg, #b2e5ef, #d7d8d1);
     padding: 5px 20px; 
     border-radius: 12px;/* セクションの角を少し丸くする */
 }
+#services {
+    margin-bottom: 10px;/* 下に10pxスペースを作る */
+}
+
+
+/* ===== セクション別背景(FAQ) ===== */
+/* ===== FAQ 全体 ===== */
+#faq {
+    max-width: 800px;         /* 横幅を制限して読みやすくする */
+    margin: 0 auto;           /* 中央寄せ */
+    padding: 20px;
+    text-align: center;         /* 中央にする */
+}
+
+
+
+/* ===== アコーディオン（details） ===== */
+#faq details {
+    background: #ffffff;              /* 白カード */
+    border-radius: 10px;              /* 角丸 */
+    padding: 5px 20px;
+    margin-bottom: 10px;              /* カード間の隙間 */
+    border: 2px solid #e3e7eb;        /* 薄い枠線 */
+    transition: all 0.3s ease;        /* ホバー時の動き */
+    cursor: pointer;
+}
+
+/* ホバーで軽く浮くアニメ */
+#faq details:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* summary（質問部分） */
+#faq summary {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;         /* 左詰めにする */
+    list-style: none;         /* デフォルトの三角を消す */
+    position: relative;
+    padding-right: 10px;
+}
+
+/* ▼ 独自の三角アイコン */
+#faq summary::after {
+    content: "▼";
+    font-size: 12px;
+    position: absolute;
+    right: 0;
+    top: 4px;
+    transition: transform 0.3s ease;
+}
+
+/* ▼ 開いたときに三角を回転 */
+#faq details[open] summary::after {
+    transform: rotate(180deg);
+}
+
+/* 回答のテキスト */
+#faq p {
+    margin-top: 10px;
+    text-align: left;         /* 左詰めにする */
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444;
+}
+
+
+
+
 /* ===== セクション別背景(CONTACT) ===== */
 #contact.section {
     background: linear-gradient(135deg, #c5ebf3, #b3b4af);/* 背景を斜め方向(135度)のグラデーションにする */
@@ -203,7 +279,7 @@ body {
 /* ================================
   カード（）
 ================================ */
-/* ▼ カード共通-------------------------------------- */
+/* ▼ カード共通(SERVICES)-------------------------------- */
 .card {
     width: 200px;
     height: 20px;
@@ -216,6 +292,26 @@ body {
     align-items: center;           /* 垂直方向の中央揃え */
     text-decoration: none;         /* リンクの下線を消す */
     color: inherit;                /* 親要素の文字色を継承する */
+    cursor: pointer;               /* カーソルをポインタにしてクリック可能と示す */
+    
+    /* ▼ スマホでの操作性向上 -------------- */
+    touch-action: manipulation;    /* タップ時の 300ms 遅延（古いスマホ）を無効化 */
+    -webkit-tap-highlight-color: transparent; /* タップ時の青いハイライト（Android）を消す */
+}
+/* ▼ カード(PRODUCT only)-------------------------------- */
+.card2 {
+    margin: 0 auto;/* ▼ カードを中央に置くため追加 */
+    display: block; /* flex でもいいが、中央寄せには block が最も安定 */
+    width: 300px;
+    height: 20px;
+    background: #1354f6;
+    color: white;              /* テキストは白色に */
+    font-weight: bold;             /* 文字を太く */
+    padding: 20px;                 /* カード内の余白を確保して見やすくする */
+    border-radius: 8px;            /* 角を丸くする（柔らかい印象） */
+    justify-content: center;       /* 水平方向の中央揃え */
+    align-items: center;           /* 垂直方向の中央揃え */
+    text-decoration: none;         /* リンクの下線を消す */
     cursor: pointer;               /* カーソルをポインタにしてクリック可能と示す */
     
     /* ▼ スマホでの操作性向上 -------------- */
@@ -390,29 +486,31 @@ img {
 #gourmetNext, #photoNext {
     right: 0;         /* 右端に配置 */
 }
+
+
 /* ================================
     Contactフォーム（）
 ================================ */
 /* お問い合わせフォームのスタイル */
 
 .contact-select {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-bottom: 20px;
-    position: relative;
+    display: flex;   /* 子要素を横並び（flexbox）にする */
+    gap: 20px; /* ボタン同士の間隔を 20px にする */
+    justify-content: center;  /* ボタンを中央に揃える */
+    margin-bottom: 20px;/* 下に 20px の余白をつける */
+    position: relative;/* z-index を有効にするために必要な指定 */
     z-index: 10; /* ← 最前面にする */
 }
 
 .contact-btn {
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-    z-index: 10;
-    position: relative;
+    padding: 12px 20px;/* ボタン内の上下・左右の余白 */
+    border-radius: 8px;  /* ボタンの角を丸くする */
+    font-size: 18px;/* 文字サイズ */
+    font-weight: bold;  /* 文字を太字に */
+    cursor: pointer; /* クリックできるようにカーソルを指マークへ変更 */
+    border: none; /* デフォルトのボタン枠線を消す */
+    z-index: 10;     /* 他の要素より前面に表示（重なり優先） */
+    position: relative; /* z-index を有効にするため必要な指定 */
 }
 
 .line-btn {
