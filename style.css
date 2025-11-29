@@ -278,7 +278,7 @@ body {
 ================================ */
 /* ▼ カード共通(SERVICES)-------------------------------- */
 .card {
-    width: 160px;
+    width: 130px;
     height: 20px;
     background: #a6f2a4;
     font-weight: bold;             /* 文字を太く */
