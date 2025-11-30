@@ -6,38 +6,13 @@
     <title>オフィシャルグッズストア</title>
 
     <style>
-        /* ------------------------------
-           ページ全体の基本デザイン
-        ------------------------------ */
         body {
-            font-family: sans-serif;
+            font-family: "Segoe UI", sans-serif;
             padding: 20px;
-            background-color: #f0f4ef;
+            background: #f5f5f5;
         }
-        /* ------------------------------
-           中央の白いカード部分
-        ------------------------------ */
-        .section {
-            background-color: #e1e7e2;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: 0 2px 8px rgba(184, 11, 11, 0.1);
-        }
-        /* ------------------------------
-           不審者画像（クリックで拡大）
-        ------------------------------ */
-        img {
-            max-width: 90%;
-            border-radius: 10px;
-            display: block;
-            margin: 20px auto;
-            cursor: pointer;
-        }
-        /* ------------------------------
-           戻るボタン
-        ------------------------------ */
+
+        /* 戻るボタン */
         .back-btn {
             display: inline-block;
             padding: 10px 18px;
@@ -47,123 +22,229 @@
             text-decoration: none;
             margin-bottom: 20px;
         }
+        .back-btn:hover { background-color: #2980b9; }
 
-        .back-btn:hover {
-            background-color: #2980b9;
+        h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        p.subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666;
         }
 
-        /* ------------------------------
-           モーダル（拡大画像の背景）
-        ------------------------------ */
-        #modal {
-            display: none;  /* 初期は非表示 */
-            position: fixed; /* 画面固定 */
-            z-index: 1000;  /* 最前面に表示 */
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);/* 半透明の黒背景 */
+        /* ----------------------------------
+           ★ 商品一覧：EC風グリッド
+        ---------------------------------- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-            justify-content: center;/* ★ 重要：中央に配置するために必要 */
+        .product-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.18);
+        }
+
+        /* 商品画像 */
+        .product-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        /* 商品名 */
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+
+        /* EC風の価格表示（ギル） */
+        .product-price {
+            font-size: 16px;
+            color: #d35400;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+            /* ★ SOLD OUT バッジ */
+        .soldout-badge {
+            position: absolute;
+            top: 10px;
+            right: -5px;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            transform: rotate(10deg);
+        }
+
+
+        /* モーダル */
+        #modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
             align-items: center;
         }
-        /* ------------------------------
-           モーダル内の拡大画像
-        ------------------------------ */
+
         #modalImg {
             max-width: 90%;
             max-height: 80%;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(255,255,255,0.5);
         }
 
-        /* ------------------------------
-           ×（閉じるボタン）
-        ------------------------------ */
         .close {
             position: absolute;
-            top: 20px;
-            right: 30px;
+            top: 20px; right: 30px;
             font-size: 40px;
             color: white;
             cursor: pointer;
         }
+            /* 購入ボタン */
+        .buy-btn {
+            display: inline-block;
+           padding: 8px 14px;
+            background: #2ecc71;
+            color: white;
+            font-size: 14px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+        .buy-btn:hover { background: #27ae60; }
     </style>
 </head>
 
 <body>
 
-    <!-- ==========================
-         戻るボタン
-    =========================== -->
-    <a href="index.html" class="back-btn">← 戻る</a>
-    <!-- ==========================
-         メイン内容
-    =========================== -->
-    <section class="section">
-        <h2>Valdio オフィシャルグッズ販売</h2>
-        <p>通貨はギルになります</p>
+<a href="index.html" class="back-btn">← 戻る</a>
 
-        <!-- ▼ クリックすると拡大される画像 -->
-        <img id="goodsImg" src="images/goods1.png" alt="ウェア1">
-        <img id="goodsImg" src="images/goods2.png" alt="ウェア2">
-        <img id="goodsImg" src="images/goods3.png" alt="ウェア3">
-        <img id="goodsImg" src="images/goods4.png" alt="ウェア4">
-        <img id="goodsImg" src="images/goods5.jpg" alt="ウェア5">
-        <img id="goodsImg" src="images/goods6.jpg" alt="ウェア6">
-        <img id="goodsImg" src="images/goods7.png" alt="ウェア7">
-        <img id="goodsImg" src="images/goods8.png" alt="ウェア8">
-        <img id="goodsImg" src="images/goods9.png" alt="ウェア9">
-        <img id="goodsImg" src="images/goods10.png" alt="ウェア10">
-    </section>
+<h2>Valdio オフィシャルグッズ</h2>
+<p class="subtitle">通貨はギルになります</p>
 
-    <!-- ==========================
-         モーダル（画像拡大表示）
-    =========================== -->
-    <div id="modal">
-        <span class="close">&times;</span>
-        <img id="modalImg">
+<!-- -------------------------
+     ★ 商品カード一覧
+-------------------------- -->
+<div class="product-grid">
+    <!-- 1つのカード（ここをコピペして増やすだけ） -->
+    <div class="product-card">
+        <img src="images/goods1.png" alt="ウェア1" class="product-img">
+        <p class="product-name">チームワッペン</p>
+        <p class="product-price">1200 ギル</p>
+        <a class="buy-btn" href="purchase.html?name=チームワッペン&price=1200&img=images/goods1.png">購入する</a>
     </div>
 
-    <script>
-    /* ------------------------------
-           必要な要素の取得
-    ------------------------------ */
-        const img = document.getElementById('dangerImg');
-        const modal = document.getElementById('modal');
-        const modalImg = document.getElementById('modalImg');
-        const closeBtn = document.querySelector('.close');
+    <div class="product-card soldout">
+        <div class="soldout-badge">SOLD OUT</div>
+        <img src="images/goods2.png" alt="ウェア2" class="product-img">
+        <p class="product-name">ユニフォーム Type B</p>
+        <p class="product-price">1300 ギル</p>
+    </div>
 
-        /* ------------------------------
-           画像クリック → モーダルを開く
-        ------------------------------ */
+    <div class="product-card">
+        <img src="images/goods3.png" alt="ウェア3" class="product-img">
+        <p class="product-name">ユニフォーム Type A</p>
+        <p class="product-price">6000 ギル</p>
+        <a class="buy-btn" href="purchase.html?name=ユニフォーム Type A&price=6000&img=images/goods3.png">購入する</a>
+    </div>
+
+    <div class="product-card">
+        <img src="images/goods4.png" alt="ウェア4" class="product-img">
+        <p class="product-name">ユニフォーム Type B</p>
+        <p class="product-price">6000 ギル</p>
+        <a class="buy-btn" href="purchase.html?name=ユニフォーム Type B&price=6000&img=images/goods4.png">購入する</a>
+    </div>
+
+    <div class="product-card">
+        <img src="images/goods5.jpg" alt="ウェア5" class="product-img">
+        <p class="product-name">プラクティスA Tシャツ2枚</p>
+        <p class="product-price">6800 ギル</p>
+        <a class="buy-btn" href="purchase.html?name=プラクティスA Tシャツ2枚&price=6800&img=images/goods5.jpg">購入する</a>
+    </div>
+
+    <div class="product-card">
+        <img src="images/goods6.jpg" alt="ウェア6" class="product-img">
+        <p class="product-name">プラクティスB Tシャツ2枚</p>
+        <p class="product-price">7000 ギル</p>
+        <a class="buy-btn" href="purchase.html?name=プラクティスB Tシャツ2枚&price=7000&img=images/goods6.jpg">購入する</a>
+    </div>
+
+    <div class="product-card">
+        <img src="images/goods7.png" alt="ウェア7" class="product-img">
+        <p class="product-name">限定Tシャツ</p>
+        <p class="product-price">7800 ギル</p>
+        <a class="buy-btn" href="purchase.html?name=限定Tシャツ&price=7800&img=images/goods7.png">購入する</a>
+    </div>
+
+    <div class="product-card">
+        <img src="images/goods8.png" alt="ウェア8" class="product-img">
+        <p class="product-name">ユニフォーム上下</p>
+        <p class="product-price">15800 ギル</p>
+        <a class="buy-btn" href="purchase.html?name=ユニフォーム上下&price=15800&img=images/goods8.png">購入する</a>
+    </div>
+
+    <div class="product-card">
+        <img src="images/goods9.png" alt="ウェア9" class="product-img">
+        <p class="product-name">限定ジャージ</p>
+        <p class="product-price">22800 ギル</p>
+        <a class="buy-btn" href="purchase.html?name=限定ジャージ<&price=22800&img=images/goods9.png">購入する</a>
+    </div>
+
+    <div class="product-card">
+        <img src="images/goods10.png" alt="ウェア10" class="product-img">
+        <p class="product-name">限定シューズ</p>
+        <p class="product-price">14800 ギル</p>
+        <a class="buy-btn" href="purchase.html?name=限定シューズ<&price=14800&img=images/goods10.png">購入する</a>
+    </div>
+
+    <!-- 必要分どんどん追加（元の10枚ぜんぶOK） -->
+</div>
+
+<!-- モーダル（画像拡大） -->
+<div id="modal">
+    <span class="close">&times;</span>
+    <img id="modalImg">
+</div>
+
+<script>
+    // すべての商品画像にクリックイベント付ける
+    const productImages = document.querySelectorAll('.product-img');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const closeBtn = document.querySelector('.close');
+
+    productImages.forEach(img => {
         img.addEventListener('click', () => {
             modalImg.src = img.src;
             modal.style.display = 'flex';
         });
+    });
 
-        /* ------------------------------
-           モーダル背景クリック → 閉じる
-        ------------------------------ */
-        modal.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        /* ------------------------------
-           × ボタンで閉じる
-        ------------------------------ */
-        closeBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            modal.style.display = 'none';
-        });
-
-        // 画像自身をクリックしても閉じないようにする
-        modalImg.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
-    </script>
+    closeBtn.addEventListener('click', () => modal.style.display = 'none');
+    modal.addEventListener('click', () => modal.style.display = 'none');
+    modalImg.addEventListener('click', e => e.stopPropagation());
+</script>
 
 </body>
-
 </html>
