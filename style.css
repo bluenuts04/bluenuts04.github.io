@@ -98,13 +98,10 @@ body {
         transform: translateX(0);
     }
 }
-
 .normal-content p {
     opacity: 0;  /* 初期状態は非表示 */
     animation: slideFadeIn 1.2s ease-out 0.3s forwards;
 }
-
-
 
 /* ▼ ヒーロー全体（動画を背景にする大きいヘッダー部分） ---------------------- */
 .hero {
@@ -460,6 +457,25 @@ img {
     from {opacity:0;} /* 完全に透明な状態からスタート */
     to {opacity:1;} /* 徐々に表示されてくる */
 }
+/* ================================
+   戦術/テクニック
+================================ */
+/* キーワード用のスタイル */
+.tactic-word, .technic-word {
+    position: absolute;
+    font-weight: bold;
+    pointer-events: none; 
+    user-select: none;
+    animation: float 5s ease-in-out infinite;
+}
+
+/* 浮遊アニメーション */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
 
 /* ================================
    slider 共通設定（グルメ/写真）

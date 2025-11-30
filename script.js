@@ -134,10 +134,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (teamName) {
         let step = 0;
         const messages = [
+            "知りたいの？",
             "ほんとうに知りたい？",
-            "ほんとうにほんとうに？",
-            "知っても後悔しないなら、もう一度押してくれ",
-            "実はGPTで考えました(笑)"
+            "ほんとうのほんとうに？",
+            "知っても後悔しない？",
+            "OK。もう一回押して",
+            ""
         ];
 
         const msgBox = document.createElement("p");
@@ -199,25 +201,29 @@ document.addEventListener("DOMContentLoaded", () => {
     setupClickableMessage("team-concept", [
         "🌟 明るく！楽しく！仲間と共に成長するチーム 🌟",
         "💡 協力して挑戦することを大切にしています",
-        "😊 みんなで支え合い、楽しむことがモットーです"
+        "😊 みんなで支え合い、楽しむことがモットーです",
+        ""
     ]);
 
     setupClickableMessage("member-atmosphere", [
         "😊 メンバーは明るく協力的です",
-        "🤝 チームワークを大切にしています",
-        "🎉 みんなで楽しみながら成長しています"
+        "🤝 初心者から経験者、20～40代です",
+        "🎉 みんなで楽しみながら成長しています",
+        ""
     ]);
 
     setupClickableMessage("main-activity", [
         "⚽ 主にフットサル活動を行います",
         "🏆 大会や練習試合にも参加しています",
-        "📅 定期的に練習スケジュールがあります"
+        "📅 定期的に練習スケジュールがあります",
+        ""
     ]);
 
     setupClickableMessage("notes", [
         "⚠️ 活動に参加する際は安全に注意してください",
         "⏰ 遅刻や欠席の連絡は必ずお願いします",
-        "📌 貴重品の管理は各自でお願いします"
+        "📌 貴重品の管理は各自でお願いします",
+        ""
     ]);
 
     // -----------------------------------
@@ -244,8 +250,75 @@ document.addEventListener("DOMContentLoaded", () => {
             { img:"images/play4.jpg" }
         ], "photoPrev", "photoNext");
     });
-    document.getElementById("open-tactics")?.addEventListener("click", () => showSection("tactics-section"));
-    document.getElementById("open-technic")?.addEventListener("click", () => showSection("technic-section"));
+
+
+
+// ------------------ 戦術 ------------------
+document.getElementById("open-tactics")?.addEventListener("click", () => {
+    showSection("tactics-section");
+    showFloatingTactics();
+});
+
+function showFloatingTactics() {
+    const display = document.getElementById("tactics-display");
+    const keywords = ["アラ","フィクソ","ピヴォ","ゴレイロ","1-2-1","2-2","3-1","点を取る","守り切る","ボックス","ダイヤモンド","根性","パス＆ゴー"];
+
+    display.innerHTML = "";
+    const displayWidth = display.clientWidth;
+    const displayHeight = display.clientHeight;
+
+    keywords.forEach(text => {
+        const span = document.createElement("span");
+        span.textContent = text;
+        span.className = "tactic-word";
+
+        const colors = ["#e74c3c","#3498db","#2ecc71","#f39c12","#9b59b6","#313031ff","#561cd1ff"];
+        span.style.color = colors[Math.floor(Math.random() * colors.length)];
+        span.style.fontSize = (16 + Math.random()*16) + "px";
+        span.style.left = Math.random() * (displayWidth - 50) + "px";
+        span.style.top = Math.random() * (displayHeight - 30) + "px";
+        span.style.animationDuration = (4 + Math.random()*4) + "s";
+
+        display.appendChild(span);
+    });
+}
+
+// ------------------ テクニック ------------------
+document.getElementById("open-technic")?.addEventListener("click", () => {
+    showSection("technic-section");
+    showFloatingTechnic();
+});
+
+function showFloatingTechnic() {
+    const display = document.getElementById("technic-display");
+    const keywords = ["シュート","インステップキック","アウトサイドキック","インフロントキック","トーキック","チップキック","スタート＆ストップ","シザース","アーリクロス","ヒールリフト","キックフェイント","ラボーナ"];
+
+    display.innerHTML = "";
+    const displayWidth = display.clientWidth;
+    const displayHeight = display.clientHeight;
+
+    keywords.forEach(text => {
+        const span = document.createElement("span");
+        span.textContent = text;
+        span.className = "technic-word";
+
+        const colors = ["#e74c3c","#9cd0f3ff","#d33bcbff","#f39c12","#1c0ee3ff","#313031ff","#0fcd62ff"];
+        span.style.color = colors[Math.floor(Math.random() * colors.length)];
+        span.style.fontSize = (16 + Math.random()*16) + "px";
+        span.style.left = Math.random() * (displayWidth - 50) + "px";
+        span.style.top = Math.random() * (displayHeight - 30) + "px";
+        span.style.animationDuration = (4 + Math.random()*4) + "s";
+
+        display.appendChild(span);
+    });
+}
+
+    
+    
+    
+    
+    
+    
     document.getElementById("open-gourmet")?.addEventListener("click", () => {
         showSection("gourmet-section");
         setupInfiniteSlider("gourmetSlider", [
