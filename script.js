@@ -249,12 +249,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("open-gourmet")?.addEventListener("click", () => {
         showSection("gourmet-section");
         setupInfiniteSlider("gourmetSlider", [
-            { img:"images/gourmet1.jpg", shop:"とんかつ檍", menu:"特ロースかつ定食", comment:"林SP蒲田本店" },
-            { img:"images/gourmet2.jpg", shop:"花山うどん", menu:"ざる二味", comment:"群馬名物ひもかわ" },
-            { img:"images/gourmet3.jpg", shop:"鶏ポタラーメンTHANK", menu:"ラーメンぽてりRich", comment:"鶏肉と野菜のポタージュの健康ラーメン" },
-            { img:"images/gourmet4.jpg", shop:"ラーメン潤", menu:"得ラーメン", comment:"新潟系背油いっぱい岩ノリ" },
-            { img:"images/gourmet5.jpg", shop:"ラーメン飛粋", menu:"特製ラーメン", comment:"上品な家系" },
-            { img:"images/gourmet6.jpg", shop:"新橋ニューともちんラーメン", menu:"中華そば", comment:"懐かしい、やさしいお味" }
+            { img:"images/gourmet1.jpg", shop:"とんかつ檍", menu:"特ロースかつ定食", comment:"林SP蒲田本店", adress:"大田区蒲田５丁目４３−７", hp:"https://tonkatsu-aoki.chom/" },
+            { img:"images/gourmet2.jpg", shop:"花山うどん", menu:"ざる二味", comment:"群馬名物ひもかわ", adress:"大田区羽田空港 (第3ターミナル直結施設内)" , hp:"https://www.hanayamaudon.co.jp/" },
+            { img:"images/gourmet3.jpg", shop:"鶏ポタラーメンTHANK", menu:"ラーメンぽてりRich", comment:"鶏肉と野菜のポタージュの健康ラーメン" , adress:"大田区蒲田5-43-6", hp:"https://thanktank.jp/toripota"},
+            { img:"images/gourmet4.jpg", shop:"ラーメン潤", menu:"得ラーメン", comment:"新潟系背油いっぱい岩ノリ" , adress:"大田区蒲田5-20-7 シャトー蒲田13-102", hp:"https://gbct700.gorp.jp/"},
+            { img:"images/gourmet5.jpg", shop:"ラーメン飛粋", menu:"特製ラーメン", comment:"上品な家系", adress:"大田区矢口1-16-24", hp:"https://hiiki.co.jp/" },
+            { img:"images/gourmet6.jpg", shop:"新橋ニューともちんラーメン", menu:"中華そば", comment:"懐かしい、やさしいお味", adress:"大田区西蒲田７丁目２−６ 第二醍醐ビル", hp:"https://chan-noren-kumiai.com/"}
         ], "gourmetPrev", "gourmetNext");
     });
 
@@ -282,6 +282,15 @@ document.addEventListener("DOMContentLoaded", () => {
                         <p><b>${item.shop}</b></p>
                         <p>${item.menu}</p>
                         <p>${item.comment}</p>
+                        <p class="adress">    <!-- 住所：Googleマップで開く -->
+                         <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.adress)}" target="_blank">
+                         ${item.adress}</p>
+                         </a>
+                        </p>
+                            <!-- 公式HP：直接リンク -->
+                        <p class="hp">
+                         <a href="${item.hp}" target="_blank">公式HP</a>
+                        </p>
                     </div>
                 `;
             } else { // プレイ写真
@@ -369,8 +378,6 @@ document.addEventListener("DOMContentLoaded", () => {
           behavior: "smooth"
         });
     });
-
-
 });
 
 // =============================

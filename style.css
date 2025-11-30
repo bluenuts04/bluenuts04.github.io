@@ -7,6 +7,7 @@ body {
     
     font-family: sans-serif;       /* 全体のフォントをサンセリフ体に統一 */
     color: #333;                   /* 文字色を濃いグレーに設定（黒より少し柔らかい） */
+
 }
 /* ================================
   ヘッダー（）
@@ -87,6 +88,24 @@ body {
     background: #ffffff; /* お知らせ帯の下は別色 */
     padding: 0px 6px;
 }
+@keyframes slideFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(50px); /* 右から登場 */
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.normal-content p {
+    opacity: 0;  /* 初期状態は非表示 */
+    animation: slideFadeIn 1.2s ease-out 0.3s forwards;
+}
+
+
+
 /* ▼ ヒーロー全体（動画を背景にする大きいヘッダー部分） ---------------------- */
 .hero {
     position: relative;        /* 子要素（動画やオーバーレイ）を重ねるための基準にする */
@@ -125,8 +144,22 @@ body {
     inset: 0;                        /* top, right, bottom, left を 0 に（省略記法） */
 }
 
+/* フェードイン用キーframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* 下から少し上がる演出（任意） */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* ▼ 中央のテキスト ----------------------------------------------------- */
 .hero-text {
+    opacity: 0;            /* 初期状態は非表示 */
+    animation: fadeIn 1.5s ease-out 0.5s forwards;/* 1.5s = 再生時間 0.5s = 遅延 forwards = アニメ後も表示維持 */
     position: relative;   /* スタック位置を明確に */
     z-index: 10;          /* 動画とオーバーレイより前面に表示 */
 }
@@ -145,7 +178,7 @@ body {
 #contact h2,
 #faq h2 {
     font-size: 32px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;/* 下に10pxスペースを作る */
 }
 
 /* ABOUT セクションの項目をボタン風にする */
@@ -192,7 +225,7 @@ body {
   
 }
 #about {
-    margin-bottom: 10px; /* 下に10pxスペースを作る */
+    margin-bottom: 10px; 
 }
 /* ===== セクション別背景(SERVICES) ===== */
 #services.section {
@@ -203,7 +236,12 @@ body {
 #services {
     margin-bottom: 10px;/* 下に10pxスペースを作る */
 }
+/* ===== セクション別背景(PRODUCT) ===== */
 
+#product p .red-text {
+    color: red !important;
+    font-weight: bold;
+}
 
 /* ===== セクション別背景(FAQ) ===== */
 /* ===== FAQ 全体 ===== */
